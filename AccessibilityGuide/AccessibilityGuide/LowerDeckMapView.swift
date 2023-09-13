@@ -16,43 +16,47 @@ struct LowerDeckMapView: View {
     var body: some View {
         VStack {
             HStack{
-                Image(systemName: "photo.fill")
-                    .font(.system(size: 40))
-                    .multilineTextAlignment(.leading)
+                Image("logo")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 170, height: 170, alignment: .leading)
                 VStack{
                     Text("Guide for the SS Great Britain")
-                        .font(.system(size: 40))
+                        .font(.system(size: 45))
                         .bold()
                         .multilineTextAlignment(.leading)
-                        .padding([.leading], -370)
-                        .padding([.bottom], 10)
+                        .padding([.leading], -280)
+                        .padding([.bottom, .top], 10)
+                        .padding([.top], 30)
                     VStack{
                         Text("If the telescope buzzes, the map will tell you what you are near.")
-                        .font(.system(size: 33))
+                        .font(.system(size: 28))
                             .multilineTextAlignment(.trailing)
+                            .padding([.leading], -100)
                         Text("You can then expand the telescope to get more information.")
-                            .font(.system(size: 33))
+                            .font(.system(size: 28))
                             .multilineTextAlignment(.trailing)
-                            .padding([.leading], -45)
+                            .padding([.leading], -140)
                     }
                     .padding([.bottom], 30)
                 }
-                .frame(width: 925, height: 170, alignment: .leading)
+                .frame(width: 880, height: 100)
                 Spacer()
                 VStack{
                     HStack{
-                        Text("Instruction Page")
-                            .multilineTextAlignment(.trailing)
-                            .padding([.leading, .bottom], 40)
-                            .font(.system(size: 36))
-                        Image(systemName: "questionmark")
-                            .font(.system(size: 40))
-                            .multilineTextAlignment(.trailing)
-                            .padding([.bottom], 40)
+                        Button(action: goToInstructions){  Text("Instruction Page")
+                                .multilineTextAlignment(.trailing)
+                                .padding([ .bottom], 40)
+                                .font(.system(size: 31))
+                            Image(systemName: "questionmark")
+                                .font(.system(size: 40))
+                                .multilineTextAlignment(.trailing)
+                                .padding([.bottom], 40)
+                        }
                     }
                     HStack{
                         Text("Check to show all\ninformation points")
-                            .font(.system(size: 30))
+                            .font(.system(size: 28))
                     }
                 }
             }
@@ -63,26 +67,34 @@ struct LowerDeckMapView: View {
             VStack {
                 HStack{
                     Text("Currently Viewing:" ).padding([.leading], -140)
-                        .font(.system(size: 20))
+                        .font(.system(size: 21))
                         Text("The Ship: Lower Deck").bold()
+                        .font(.system(size: 39))
                     Spacer()
-                    Text("Touch the arrow to the right\nto see the location list")
-                        .font(.system(size: 20))
-                    Image(systemName: "arrowshape.left.fill")
-                        .resizable(capInsets: EdgeInsets(top: 0.0, leading: 0.0, bottom: 0.0, trailing: 0.0))
-                        .frame(width: 100.0, height: 100.0)
-                        .padding([.trailing], -50)
+                    Menu("Touch here to see the \nlocation list"){
+                        Button(action: goToMap){Text("The Ship: Dry Dock")}
+                        Button(action: goToMap){Text("The Ship: Top Deck")}
+                        Button(action: goToLowerDeck){Text("The Ship: Lower Deck")}
+                        Button(action: goToMap){Text("The Ship: Middle Deck")}
+                        Button(action: goToMap){Text("Being Brunel: Ground")}
+                        Button(action: goToMap){Text("Being Brunel: First")}
+                    }
+                    .font(.system(size: 28))
+                    .foregroundColor(Color.black)
+                   .frame(width: 350, height: 75)
+                   .multilineTextAlignment(.leading)
+
                 }
                 .padding([.leading], 200)
                 .frame(minWidth: 0, maxWidth: .infinity)
-                Image("LowerDeck")
+                Image("lower deck")
                     .resizable(capInsets: EdgeInsets(top: 0.0, leading: 0.0, bottom: 0.0, trailing: 0.0))
                     .frame(width: 1200, height: 500)
                 .padding()
                 HStack {
                     Text("Accessibility needs are different for everyone\nclick HERE to make an accessibility report without a photo")
-                        .font(.system(size: 30)).bold()
-                } // CLosing the Roles button
+                        .font(.system(size: 35)).bold()
+                } // CLosing the Accessibility report button
                 .multilineTextAlignment(.center)
                 .frame(minWidth: 0, maxWidth: .infinity)
                 .frame(height: 90)

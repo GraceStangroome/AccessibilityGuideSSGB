@@ -13,9 +13,11 @@ struct ContentView: View {
     var body: some View {
         VStack {
             HStack{
-                Image(systemName: "photo.fill")
-                    .font(.system(size: 40))
-                    .multilineTextAlignment(.leading)
+                Image("logo")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 170, height: 170, alignment: .leading)
+
                 VStack{
                     Text("Guide for the SS Great Britain")
                         .font(.system(size: 50))
@@ -27,19 +29,20 @@ struct ContentView: View {
                 }
                 .frame(width: 680, height: 100, alignment: .leading)
                 Spacer()
-                Text("Instruction Page")
-                    .font(.system(size: 40))
-                    .multilineTextAlignment(.trailing)
-                    .padding([.leading, . bottom], 40)
-                    .padding([.leading], 20)
-                Image(systemName: "questionmark")
-                    .font(.system(size: 45))
-                    .multilineTextAlignment(.trailing)
-                    .padding([.bottom], 40)
+                Button(action: goToInstructions){
+                    Text("Instruction Page")
+                        .font(.system(size: 40))
+                        .multilineTextAlignment(.trailing)
+                        .padding([.leading, . bottom], 40)
+                        .padding([.leading], 20)
+                    Image(systemName: "questionmark")
+                        .font(.system(size: 45))
+                        .multilineTextAlignment(.trailing)
+                        .padding([.bottom], 40)
+                }
             }
             .frame(minWidth: 0, maxWidth: .infinity)
-            .padding(40)
-            .padding([.bottom], 25)
+            .padding([.leading, .trailing, .bottom])
             .foregroundColor(Color.white)
             .background(Color.red)
             VStack {
@@ -67,11 +70,11 @@ struct ContentView: View {
                 .padding()
                 HStack {
                     Spacer()
-                    Text("1. Roles")
-                        .font(.system(size: 50))
-                    Image(systemName: "arrow.right")
-                        .font(.system(size: 55))
-    
+                    Button(action: goToRoles){ Text("1. Roles")
+                            .font(.system(size: 50))
+                        Image(systemName: "arrow.right")
+                            .font(.system(size: 55))
+                    }
                 } // CLosing the Roles button
                 .padding([.top], 15)
                 .padding([ .bottom], 25)
@@ -81,10 +84,17 @@ struct ContentView: View {
                 .foregroundColor(Color.white)
                 .background(Color.red)
             } // Closing the main body
-        } // Closing the entire screen
+        } // Closing Vstack of everything
     } // CLosing the body
 } // Closing the View
 
+
+func goToRoles() {
+    if let window = UIApplication.shared.windows.first {
+        window.rootViewController = UIHostingController(rootView: RoleView())
+        window.makeKeyAndVisible()
+    }
+}
 
 func goToMap() {
     if let window = UIApplication.shared.windows.first {

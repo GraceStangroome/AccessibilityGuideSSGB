@@ -11,9 +11,9 @@ struct mapView: View {
     var body: some View {
         VStack {
             HStack{
-                Image(systemName: "photo.fill")
-                    .font(.system(size: 40))
-                    .multilineTextAlignment(.leading)
+                Image("logo")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
                 VStack{
                     Text("Guide for the SS Great Britain")
                         .font(.system(size: 50))

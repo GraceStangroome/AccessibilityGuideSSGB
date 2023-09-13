@@ -16,6 +16,8 @@
 		C9093A892A7AABA100E00131 /* AccessibilityGuideUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9093A882A7AABA100E00131 /* AccessibilityGuideUITestsLaunchTests.swift */; };
 		C9093A962A7AB0D200E00131 /* mapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9093A952A7AB0D200E00131 /* mapView.swift */; };
 		C9093A982AA882D200E00131 /* LowerDeckMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9093A972AA882D200E00131 /* LowerDeckMapView.swift */; };
+		C9D062E02AB1C9A0007190A7 /* RoleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9D062DF2AB1C9A0007190A7 /* RoleView.swift */; };
+		C9D062E22AB1D069007190A7 /* TelescopeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9D062E12AB1D069007190A7 /* TelescopeView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +51,8 @@
 		C9093A882A7AABA100E00131 /* AccessibilityGuideUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessibilityGuideUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		C9093A952A7AB0D200E00131 /* mapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mapView.swift; sourceTree = "<group>"; };
 		C9093A972AA882D200E00131 /* LowerDeckMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LowerDeckMapView.swift; sourceTree = "<group>"; usesTabs = 0; };
+		C9D062DF2AB1C9A0007190A7 /* RoleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoleView.swift; sourceTree = "<group>"; };
+		C9D062E12AB1D069007190A7 /* TelescopeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TelescopeView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +103,7 @@
 		C9093A692A7AABA000E00131 /* AccessibilityGuide */ = {
 			isa = PBXGroup;
 			children = (
+				C9D062E12AB1D069007190A7 /* TelescopeView.swift */,
 				C9093A6A2A7AABA000E00131 /* AccessibilityGuideApp.swift */,
 				C9093A972AA882D200E00131 /* LowerDeckMapView.swift */,
 				C9093A6C2A7AABA000E00131 /* ContentView.swift */,
@@ -106,6 +111,7 @@
 				C9093A6E2A7AABA100E00131 /* Assets.xcassets */,
 				C9093A702A7AABA100E00131 /* AccessibilityGuide.entitlements */,
 				C9093A712A7AABA100E00131 /* Preview Content */,
+				C9D062DF2AB1C9A0007190A7 /* RoleView.swift */,
 			);
 			path = AccessibilityGuide;
 			sourceTree = "<group>";
@@ -268,7 +274,9 @@
 				C9093A962A7AB0D200E00131 /* mapView.swift in Sources */,
 				C9093A6D2A7AABA000E00131 /* ContentView.swift in Sources */,
 				C9093A6B2A7AABA000E00131 /* AccessibilityGuideApp.swift in Sources */,
+				C9D062E02AB1C9A0007190A7 /* RoleView.swift in Sources */,
 				C9093A982AA882D200E00131 /* LowerDeckMapView.swift in Sources */,
+				C9D062E22AB1D069007190A7 /* TelescopeView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
