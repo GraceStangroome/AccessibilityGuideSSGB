@@ -102,7 +102,7 @@ func goToLowerDeck() {
 }
 
 
-
+// need something here about listening for theb messages from the telescope?
 
 struct mapView_Previews: PreviewProvider {
     static var previews: some View {

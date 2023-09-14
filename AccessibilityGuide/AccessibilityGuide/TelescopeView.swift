@@ -124,6 +124,8 @@ struct TelescopeView: View {
 
 func testVibration() {
     print("Beep Boop testing vibration!")
+    ClientMQTTManager.buttonPressed(ClientMQTTManager)
+    print("Finished on my end!")
 }
 
 struct TelescopeView_Previews: PreviewProvider {
