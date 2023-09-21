@@ -103,6 +103,9 @@ func goToLowerDeck() {
 
 
 // need something here about listening for theb messages from the telescope?
+// if it gets one
+// find which one it is and pull the appropriate message from somewhere?
+
 
 struct mapView_Previews: PreviewProvider {
     static var previews: some View {

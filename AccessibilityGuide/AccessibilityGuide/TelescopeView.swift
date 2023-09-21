@@ -124,7 +124,7 @@ struct TelescopeView: View {
 
 func testVibration() {
     print("Beep Boop testing vibration!")
-    ClientMQTTManager.buttonPressed(ClientMQTTManager)
+    // send some message via MQTT to vibrate
     print("Finished on my end!")
 }
 
