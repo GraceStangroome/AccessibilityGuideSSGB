@@ -1,0 +1,8 @@
+platform :ios, '16.4'
+use_frameworks!
+
+target 'AccessibilityGuide' do
+    pod 'CocoaMQTT'
+    pod 'CocoaAsyncSocket'  
+    pod 'CocoaMQTT/WebSockets', '>= 0'
+end
