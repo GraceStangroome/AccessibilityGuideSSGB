@@ -3,6 +3,6 @@ use_frameworks!
 
 target 'AccessibilityGuide' do
     pod 'CocoaMQTT'
-    pod 'CocoaAsyncSocket'  
     pod 'CocoaMQTT/WebSockets', '>= 0'
+    pod 'Starscream', '~> 3.1.1'
 end

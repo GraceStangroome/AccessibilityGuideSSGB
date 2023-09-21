@@ -581,3 +581,9 @@ extension Optional {
 }
 
 
+// if RFID Message is certain thing
+// var popUpWindow: PopUpWindow!
+//popUpWindow = PopUpWindow(title: " ", text: " ", buttontext: "Close")
+// self.present(popUpWindow, animated: true, completion: nil)
+
+
