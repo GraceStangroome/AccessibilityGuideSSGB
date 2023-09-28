@@ -71,6 +71,7 @@
 		C9093A882A7AABA100E00131 /* AccessibilityGuideUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessibilityGuideUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		C9093A952A7AB0D200E00131 /* mapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mapView.swift; sourceTree = "<group>"; };
 		C9093A972AA882D200E00131 /* LowerDeckMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LowerDeckMapView.swift; sourceTree = "<group>"; usesTabs = 0; };
+		C92318E82AC61EBB00EAD69C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		C9BB286B2AB3064B0030E5EC /* MQTTManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MQTTManager.swift; sourceTree = "<group>"; };
 		C9BB289C2AB8A5830030E5EC /* PopUpWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpWindow.swift; sourceTree = "<group>"; };
 		C9D062DF2AB1C9A0007190A7 /* RoleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoleView.swift; sourceTree = "<group>"; };
@@ -139,6 +140,7 @@
 		C9093A692A7AABA000E00131 /* AccessibilityGuide */ = {
 			isa = PBXGroup;
 			children = (
+				C92318E82AC61EBB00EAD69C /* Info.plist */,
 				C9D062E12AB1D069007190A7 /* TelescopeView.swift */,
 				C9093A6A2A7AABA000E00131 /* AccessibilityGuideApp.swift */,
 				C9093A972AA882D200E00131 /* LowerDeckMapView.swift */,
@@ -535,6 +537,7 @@
 				ENABLE_PREVIEWS = YES;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = AccessibilityGuide/Info.plist;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -578,6 +581,7 @@
 				ENABLE_PREVIEWS = YES;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = AccessibilityGuide/Info.plist;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;

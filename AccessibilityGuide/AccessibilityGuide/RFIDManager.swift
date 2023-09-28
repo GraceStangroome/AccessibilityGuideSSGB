@@ -21,7 +21,7 @@ class RFIDManager: UIViewController {
     var mqtt5: CocoaMQTT5?
     var mqtt: CocoaMQTT?
     var client: String?
-    var mqttVersion: String?
+    var mqttVersion: String? = "5.0"
 
     var messages: [RFIDMessage] = [] {
         didSet {
@@ -30,15 +30,20 @@ class RFIDManager: UIViewController {
     }
     
     func doThings() -> String {
-        let message = messages[messages.count - 1]
-        if (message.tag == "lowerdeck") {
-            goToLowerDeck()
-        }
-        
-        else if (message.tag == "lowerdeck1") {
-            var popUpWindow: PopUpWindow!
-            popUpWindow = PopUpWindow(title: "You are now on the Lower Deck", text: "This is the last level of the ship’s interior. The SS Great Britain being launched into Bristol’s Floating Harbour on 19 July 1843. Even Prince Albert came to Bristol to celebrate.")
-            self.present(popUpWindow, animated: true, completion: nil)
+        print("Started doing things")
+        if messages.count > 0 {
+            let message = messages[messages.count]
+            if (message.tag == "lowerdeck") {
+                print("Trying to go to lowerdeck")
+                goToLowerDeck()
+            }
+            
+            else if (message.tag == "lowerdeck1") {
+                print("Trying the pop up")
+                var popUpWindow: PopUpWindow!
+                popUpWindow = PopUpWindow(title: "You are now on the Lower Deck", text: "This is the last level of the ship’s interior. The SS Great Britain being launched into Bristol’s Floating Harbour on 19 July 1843. Even Prince Albert came to Bristol to celebrate.")
+                self.present(popUpWindow, animated: true, completion: nil)
+            }
         }
         return "Done"
     }

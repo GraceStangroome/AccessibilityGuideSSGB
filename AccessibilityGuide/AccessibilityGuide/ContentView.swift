@@ -97,10 +97,14 @@ func goToRoles() {
 }
 
 func goToMap() {
+    print("Got here")
     let mqttmanager = MQTTManager()
-    var settings: () = mqttmanager.mqttSetting()
+    mqttmanager.connect()
+    mqttmanager.subscribe(toTopic: "messagesforiPad")
+    mqttmanager.publish(topic: "messagesFromiPad", content: "iPad connected")
     
-    // _ mqtt5: CocoaMQTT5, didReceiveAuthReasonCode reasonCode: CocoaMQTTAUTHReasonCode
+    
+    /// _ mqtt5: CocoaMQTT5, didReceiveAuthReasonCode reasonCode: CocoaMQTTAUTHReasonCode
     
     if let window = UIApplication.shared.windows.first {
         window.rootViewController = UIHostingController(rootView: mapView())
