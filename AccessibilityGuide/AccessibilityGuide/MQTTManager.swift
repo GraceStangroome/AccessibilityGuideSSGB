@@ -21,27 +21,20 @@ import UIKit
 import CocoaMQTT
 
 
-class ViewController: UIViewController {
+class MQTTManager: UIViewController {
     
     //let defaultHost = "localhost"
     //OR
     //TEST Broker
-    let defaultHost = "broker-cn.emqx.io"
+    let defaultHost = "192.168.86.164"
 
     var mqtt5: CocoaMQTT5?
     var mqtt: CocoaMQTT?
-    var animal: String?
     var mqttVesion: String?
 
     @IBOutlet weak var versionControl: UISegmentedControl!
     @IBOutlet weak var connectButton: UIButton!
-    @IBOutlet weak var animalsImageView: UIImageView! {
-        didSet {
-            animalsImageView.clipsToBounds = true
-            animalsImageView.layer.borderWidth = 1.0
-            animalsImageView.layer.cornerRadius = animalsImageView.frame.width / 2.0
-        }
-    }
+    
     
     @IBAction func connectToServer() {
         if mqttVesion == "3.1.1" {
@@ -53,12 +46,11 @@ class ViewController: UIViewController {
     }
     
     @IBAction func mqttVersionControl(_ sender: UISegmentedControl) {
-        animal = tabBarController?.selectedViewController?.tabBarItem.title
         mqttVesion = versionControl.titleForSegment(at: versionControl.selectedSegmentIndex)
 
         mqttSettingList()
         
-        print("welcome to MQTT \(String(describing: mqttVesion))  \(String(describing: animal))")
+        print("welcome to MQTT \(String(describing: mqttVesion))")
     }
 
     func sendAuthToServer(){
@@ -70,12 +62,11 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         navigationController?.interactivePopGestureRecognizer?.isEnabled = false
         tabBarController?.delegate = self
-        animal = tabBarController?.selectedViewController?.tabBarItem.title
         mqttVesion = versionControl.titleForSegment(at: versionControl.selectedSegmentIndex)
 
         mqttSettingList()
 
-        print("welcome to MQTT \(String(describing: mqttVesion))  \(String(describing: animal))")
+        print("welcome to MQTT \(String(describing: mqttVesion))")
 
     }
     
@@ -97,7 +88,7 @@ class ViewController: UIViewController {
 
         if mqttVesion == "3.1.1" {
 
-            let clientID = "CocoaMQTT-\(animal!)-" + String(ProcessInfo().processIdentifier)
+            let clientID = "iPad" + String(ProcessInfo().processIdentifier)
             mqtt = CocoaMQTT(clientID: clientID, host: defaultHost, port: 1883)
             mqtt!.logLevel = .debug
             mqtt!.username = ""
@@ -109,7 +100,7 @@ class ViewController: UIViewController {
             
         }else if mqttVesion == "5.0" {
 
-            let clientID = "CocoaMQTT5-\(animal!)-" + String(ProcessInfo().processIdentifier)
+            let clientID = "iPad" + String(ProcessInfo().processIdentifier)
             mqtt5 = CocoaMQTT5(clientID: clientID, host: defaultHost, port: 1883)
             mqtt5!.logLevel = .debug
             let connectProperties = MqttConnectProperties()
@@ -142,7 +133,7 @@ class ViewController: UIViewController {
 
         if mqttVesion == "3.1.1" {
 
-            let clientID = "CocoaMQTT-\(animal!)-" + String(ProcessInfo().processIdentifier)
+            let clientID = "iPad" + String(ProcessInfo().processIdentifier)
             mqtt = CocoaMQTT(clientID: clientID, host: defaultHost, port: 8883)
             mqtt!.username = ""
             mqtt!.password = ""
@@ -153,7 +144,7 @@ class ViewController: UIViewController {
 
         }else if mqttVesion == "5.0" {
 
-            let clientID = "CocoaMQTT5-\(animal!)-" + String(ProcessInfo().processIdentifier)
+            let clientID = "iPad" + String(ProcessInfo().processIdentifier)
             mqtt5 = CocoaMQTT5(clientID: clientID, host: defaultHost, port: 8883)
 
             let connectProperties = MqttConnectProperties()
@@ -179,7 +170,7 @@ class ViewController: UIViewController {
     func selfSignedSSLSetting() {
         if mqttVesion == "3.1.1" {
 
-            let clientID = "CocoaMQTT-\(animal!)-" + String(ProcessInfo().processIdentifier)
+            let clientID = "iPad" + String(ProcessInfo().processIdentifier)
             mqtt = CocoaMQTT(clientID: clientID, host: defaultHost, port: 8883)
             mqtt!.username = ""
             mqtt!.password = ""
@@ -198,7 +189,7 @@ class ViewController: UIViewController {
 
         }else if mqttVesion == "5.0" {
 
-            let clientID = "CocoaMQTT5-\(animal!)-" + String(ProcessInfo().processIdentifier)
+            let clientID = "iPad" + String(ProcessInfo().processIdentifier)
             mqtt5 = CocoaMQTT5(clientID: clientID, host: defaultHost, port: 8883)
 
             let connectProperties = MqttConnectProperties()
@@ -230,7 +221,7 @@ class ViewController: UIViewController {
     func mqttWebsocketsSetting() {
         if mqttVesion == "3.1.1" {
 
-            let clientID = "CocoaMQTT-\(animal!)-" + String(ProcessInfo().processIdentifier)
+            let clientID = "iPad" + String(ProcessInfo().processIdentifier)
             let websocket = CocoaMQTTWebSocket(uri: "/mqtt")
             mqtt = CocoaMQTT(clientID: clientID, host: defaultHost, port: 8083, socket: websocket)
             mqtt!.username = ""
@@ -241,7 +232,7 @@ class ViewController: UIViewController {
 
         }else if mqttVesion == "5.0" {
 
-            let clientID = "CocoaMQTT5-\(animal!)-" + String(ProcessInfo().processIdentifier)
+            let clientID = "iPad-" + String(ProcessInfo().processIdentifier)
             let websocket = CocoaMQTTWebSocket(uri: "/mqtt")
             mqtt5 = CocoaMQTT5(clientID: clientID, host: defaultHost, port: 8083, socket: websocket)
 
@@ -273,7 +264,7 @@ class ViewController: UIViewController {
     func mqttWebsocketSSLSetting() {
         if mqttVesion == "3.1.1" {
 
-            let clientID = "CocoaMQTT-\(animal!)-" + String(ProcessInfo().processIdentifier)
+            let clientID = "iPad" + String(ProcessInfo().processIdentifier)
             let websocket = CocoaMQTTWebSocket(uri: "/mqtt")
             mqtt = CocoaMQTT(clientID: clientID, host: defaultHost, port: 8084, socket: websocket)
             mqtt!.enableSSL = true
@@ -285,7 +276,7 @@ class ViewController: UIViewController {
 
         }else if mqttVesion == "5.0" {
 
-            let clientID = "CocoaMQTT5-\(animal!)-" + String(ProcessInfo().processIdentifier)
+            let clientID = "iPad" + String(ProcessInfo().processIdentifier)
             let websocket = CocoaMQTTWebSocket(uri: "/mqtt")
             mqtt5 = CocoaMQTT5(clientID: clientID, host: defaultHost, port: 8084, socket: websocket)
 
@@ -349,7 +340,7 @@ class ViewController: UIViewController {
 
 }
 
-extension ViewController: CocoaMQTT5Delegate {
+extension MQTTManager: CocoaMQTT5Delegate {
     
     func mqtt5(_ mqtt5: CocoaMQTT5, didReceiveDisconnectReasonCode reasonCode: CocoaMQTTDISCONNECTReasonCode) {
         print("disconnect res : \(reasonCode)")
@@ -376,14 +367,14 @@ extension ViewController: CocoaMQTT5Delegate {
     
     func mqtt5(_ mqtt5: CocoaMQTT5, didConnectAck ack: CocoaMQTTCONNACKReasonCode, connAckData: MqttDecodeConnAck?) {
         TRACE("ack: \(ack)")
-
+        print("Hello :)")
         if ack == .success {
             if(connAckData != nil){
                 print("properties maximumPacketSize: \(String(describing: connAckData!.maximumPacketSize))")
                 print("properties topicAliasMaximum: \(String(describing: connAckData!.topicAliasMaximum))")
             }
 
-            mqtt5.subscribe("chat/room/animals/client/+", qos: CocoaMQTTQoS.qos0)
+            mqtt5.subscribe("messages", qos: CocoaMQTTQoS.qos0)
             //or
             //let subscriptions : [MqttSubscription] = [MqttSubscription(topic: "chat/room/animals/client/+"),MqttSubscription(topic: "chat/room/foods/client/+"),MqttSubscription(topic: "chat/room/trees/client/+")]
             //mqtt.subscribe(subscriptions)
@@ -431,9 +422,9 @@ extension ViewController: CocoaMQTT5Delegate {
         }
         
         TRACE("message: \(message.string.description), id: \(id)")
-        let name = NSNotification.Name(rawValue: "MQTTMessageNotification" + animal!)
+        let name = NSNotification.Name(rawValue: "MQTTMessageNotification")
 
-        NotificationCenter.default.post(name: name, object: self, userInfo: ["message": message.string!, "topic": message.topic, "id": id, "animal": animal as Any])
+        NotificationCenter.default.post(name: name, object: self, userInfo: ["message": message.string!, "topic": message.topic, "id": id, "iPad"])
     }
     
     func mqtt5(_ mqtt5: CocoaMQTT5, didSubscribeTopics success: NSDictionary, failed: [String], subAckData: MqttDecodeSubAck?) {
@@ -468,7 +459,7 @@ extension ViewController: CocoaMQTT5Delegate {
 
 let myCert = "myCert"
 
-extension ViewController: CocoaMQTTDelegate {
+extension MQTTManager: CocoaMQTTDelegate {
 
     // self signed delegate
     func mqttUrlSession(_ mqtt: CocoaMQTT, didReceiveTrust trust: SecTrust, didReceiveChallenge challenge: URLAuthenticationChallenge, completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void){
@@ -495,7 +486,7 @@ extension ViewController: CocoaMQTTDelegate {
         TRACE("ack: \(ack)")
 
         if ack == .accept {
-            mqtt.subscribe("chat/room/animals/client/+", qos: CocoaMQTTQoS.qos1)
+            mqtt.subscribe("messages", qos: CocoaMQTTQoS.qos1)
             // do something?
         }
     }
@@ -515,7 +506,7 @@ extension ViewController: CocoaMQTTDelegate {
     func mqtt(_ mqtt: CocoaMQTT, didReceiveMessage message: CocoaMQTTMessage, id: UInt16 ) {
         TRACE("message: \(message.string.description), id: \(id)")
 
-        let name = NSNotification.Name(rawValue: "MQTTMessageNotification" + animal!)
+        let name = NSNotification.Name(rawValue: "MQTTMessageNotification")
         NotificationCenter.default.post(name: name, object: self, userInfo: ["message": message.string!, "topic": message.topic, "id": id])
     }
 
@@ -541,7 +532,7 @@ extension ViewController: CocoaMQTTDelegate {
 }
 
 
-extension ViewController: UITabBarControllerDelegate {
+extension MQTTManager: UITabBarControllerDelegate {
     // Prevent automatic popToRootViewController on double-tap of UITabBarController
     func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
         return viewController != tabBarController.selectedViewController
@@ -552,7 +543,7 @@ extension ViewController: UITabBarControllerDelegate {
     }
 }
 
-extension ViewController {
+extension MQTTManager {
     func TRACE(_ message: String = "", fun: String = #function) {
         let names = fun.components(separatedBy: ":")
         var prettyName: String
@@ -580,10 +571,5 @@ extension Optional {
     }
 }
 
-
-// if RFID Message is certain thing
-// var popUpWindow: PopUpWindow!
-//popUpWindow = PopUpWindow(title: " ", text: " ", buttontext: "Close")
-// self.present(popUpWindow, animated: true, completion: nil)
 
 

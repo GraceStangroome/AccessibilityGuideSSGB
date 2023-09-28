@@ -2,7 +2,7 @@
 //  PopUpWindow.swift
 //  AccessibilityGuide
 //
-//  Created by Grace Stangroome on 18/09/2023.
+//  Edditted by Grace Stangroome from 18/09/2023.
 // Code from https://johncodeos.com/how-to-create-a-popup-window-in-ios-using-swift/
 
 import Foundation
@@ -107,14 +107,14 @@ private class PopUpWindowView: UIView {
 class PopUpWindow: UIViewController {
     private let popUpWindowView = PopUpWindowView()
     
-    init(title: String, text: String, buttontext: String) {
+    init(title: String, text: String) {
         super.init(nibName: nil, bundle: nil)
         modalTransitionStyle = .crossDissolve
         modalPresentationStyle = .overFullScreen
         
         popUpWindowView.popupTitle.text = title
         popUpWindowView.popupText.text = text
-        popUpWindowView.popupButton.setTitle(buttontext, for: .normal)
+        popUpWindowView.popupButton.setTitle("X", for: .normal)
         
         popUpWindowView.popupButton.addTarget(self, action: #selector(dismissView), for: .touchUpInside)
         

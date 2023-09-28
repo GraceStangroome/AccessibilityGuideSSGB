@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-
+import CocoaMQTT
 
 
 struct ContentView: View {
@@ -97,6 +97,11 @@ func goToRoles() {
 }
 
 func goToMap() {
+    let mqttmanager = MQTTManager()
+    var settings: () = mqttmanager.mqttSetting()
+    
+    // _ mqtt5: CocoaMQTT5, didReceiveAuthReasonCode reasonCode: CocoaMQTTAUTHReasonCode
+    
     if let window = UIApplication.shared.windows.first {
         window.rootViewController = UIHostingController(rootView: mapView())
         window.makeKeyAndVisible()
