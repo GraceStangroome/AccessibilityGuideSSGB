@@ -22,41 +22,40 @@ struct LowerDeckMapView: View {
                     .frame(width: 150, height: 150, alignment: .leading)
                 VStack{
                     Text("Guide for the SS Great Britain")
-                        .font(.system(size: 35))
+                        .font(.system(size: 40))
                         .bold()
                         .multilineTextAlignment(.leading)
-                        .padding([.leading], -260)
                         .padding([.bottom, .top], 10)
                         .padding([.top], 20)
                     VStack{
                         Text("If the telescope buzzes, the map will tell you what you are near.")
-                        .font(.system(size: 25))
+                        .font(.system(size: 20))
                             .multilineTextAlignment(.trailing)
-                            .padding([.leading], -100)
+
                         Text("You can then expand the telescope to get more information.")
-                            .font(.system(size: 25))
+                            .font(.system(size: 20))
                             .multilineTextAlignment(.trailing)
-                            .padding([.leading], -130)
+                       
                     }
                     .padding([.bottom], 30)
                 }
-                .frame(width: 880, height: 100)
+                .frame(width: 600, height: 100)
                 Spacer()
                 VStack{
                     HStack{
                         Button(action: goToInstructions){  Text("Instruction Page")
                                 .multilineTextAlignment(.trailing)
-                                .padding([ .bottom], 40)
-                                .font(.system(size: 31))
+                                .padding([ .bottom], 30)
+                                .font(.system(size: 21))
                             Image(systemName: "questionmark")
-                                .font(.system(size: 40))
+                                .font(.system(size: 30))
                                 .multilineTextAlignment(.trailing)
                                 .padding([.bottom], 40)
                         }
                     }
                     HStack{
                         Text("Check to show all\ninformation points")
-                            .font(.system(size: 28))
+                            .font(.system(size: 18))
                     }
                 }
             }
@@ -69,7 +68,7 @@ struct LowerDeckMapView: View {
                     Text("Currently Viewing:" ).padding([.leading], -140)
                         .font(.system(size: 21))
                         Text("The Ship: Lower Deck").bold()
-                        .font(.system(size: 39))
+                        .font(.system(size: 29))
                     Spacer()
                     Menu("Touch here to see the \nlocation list"){
                         Button(action: goToMap){Text("The Ship: Dry Dock")}
@@ -79,7 +78,7 @@ struct LowerDeckMapView: View {
                         Button(action: goToMap){Text("Being Brunel: Ground")}
                         Button(action: goToMap){Text("Being Brunel: First")}
                     }
-                    .font(.system(size: 28))
+                    .font(.system(size: 20))
                     .foregroundColor(Color.black)
                    .frame(width: 350, height: 75)
                    .multilineTextAlignment(.leading)
@@ -89,11 +88,12 @@ struct LowerDeckMapView: View {
                 .frame(minWidth: 0, maxWidth: .infinity)
                 Image("lower deck")
                     .resizable(capInsets: EdgeInsets(top: 0.0, leading: 0.0, bottom: 0.0, trailing: 0.0))
-                    .frame(width: 1200, height: 500)
+                    .frame(width: 1000, height: 400)
                 .padding()
                 HStack {
                     Text("Accessibility needs are different for everyone\nclick HERE to make an accessibility report without a photo")
-                        .font(.system(size: 35)).bold()
+                        .font(.system(size: 25)).bold()
+                        .padding([.bottom], 30)
                 } // CLosing the Accessibility report button
                 .multilineTextAlignment(.center)
                 .frame(minWidth: 0, maxWidth: .infinity)

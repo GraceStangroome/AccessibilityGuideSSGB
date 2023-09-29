@@ -14,44 +14,38 @@ struct mapView: View {
                 Image("logo")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
+                    .frame(width: 150, height: 150, alignment: .leading)
                 VStack{
                     Text("Guide for the SS Great Britain")
-                        .font(.system(size: 50))
-                        .bold()
-                        .padding([.leading, .top], 25)
-                    Text("Instructions for Getting Started")
                         .font(.system(size: 40))
+                        .bold()
+                        .padding([.leading], 25)
+                    Text("Instructions for Getting Started")
+                        .font(.system(size: 30))
                         .multilineTextAlignment(.leading)
+                        .padding([.leading], -90)
                 }
-                .frame(width: 680, height: 10, alignment: .leading)
+                .frame(width: 550, height: 150, alignment: .leading)
                 Spacer()
                 Button(action: goToInstructions){
                     Text("Instruction Page")
-                        .font(.system(size: 40))
+                        .font(.system(size: 30))
                         .multilineTextAlignment(.trailing)
-                        .padding([.leading, . bottom], 40)
-                        .padding([.leading], 20)
                     Image(systemName: "questionmark")
-                        .font(.system(size: 45))
+                        .font(.system(size: 30))
                         .multilineTextAlignment(.trailing)
-                        .padding([.bottom], 40)
                 }
             }
-            .frame(minWidth: 0, maxWidth: .infinity)
-            .padding(40)
-            .padding([.bottom], 25)
+            .frame(maxWidth: .infinity)
+            .padding([.leading, .trailing, .top], 20)
             .foregroundColor(Color.white)
             .background(Color.red)
             VStack {
                 HStack{
-                    Text("Currently Viewing:" ).padding([.leading], -190)
-                        .font(.system(size: 35))
-                    VStack{
-                        Text("Choose a location or").bold().padding([.leading], -220)
-                            .font(.system(size: 25))
-                        Text("the Telescope will change the map for you").bold().padding([.leading], 20)
-                            .font(.system(size: 25))
-                    }
+                    Text("Currently Viewing:" ).padding([.leading], -140)
+                        .font(.system(size: 21))
+                        Text("Choose a location \n or the Telescope will choose for you").bold()
+                        .font(.system(size: 29))
                     Spacer()
                     Menu("Touch here to see the \nlocation list"){
                         Button(action: goToMap){Text("The Ship: Dry Dock")}
@@ -61,24 +55,26 @@ struct mapView: View {
                         Button(action: goToMap){Text("Being Brunel: Ground")}
                         Button(action: goToMap){Text("Being Brunel: First")}
                     }
-                    .font(.system(size: 30))
+                    .font(.system(size: 20))
                     .foregroundColor(Color.black)
                    .frame(width: 350, height: 75)
                    .multilineTextAlignment(.leading)
+
                 }
                 .padding([.leading], 200)
                 .frame(minWidth: 0, maxWidth: .infinity)
                 Image(systemName: "rectangle")
                     .resizable(capInsets: EdgeInsets(top: 0.0, leading: 0.0, bottom: 0.0, trailing: 0.0))
-                    .frame(width: 1250, height: 550)
+                    .frame(width: 1000, height: 400)
                 HStack {
                     Text("Accessibility needs are different for everyone\nclick HERE to make an accessibility report without a photo")
-                        .font(.system(size: 40)).bold()
-                        .frame( height: 150)
-                        .padding([.bottom], 30)
-                } // CLosing the Roles button
+                        .font(.system(size: 25)).bold()
+
+                } // CLosing the Accessibility report button
                 .multilineTextAlignment(.center)
                 .frame(minWidth: 0, maxWidth: .infinity)
+                .frame(height: 90)
+                .padding()
                 .foregroundColor(Color.white)
                 .background(Color.red)
             } // Closing the main body

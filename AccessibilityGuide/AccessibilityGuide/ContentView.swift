@@ -16,29 +16,28 @@ struct ContentView: View {
                 Image("logo")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
-                    .frame(width: 170, height: 170, alignment: .leading)
-
+                    .frame(width: 150, height: 150, alignment: .leading)
                 VStack{
                     Text("Guide for the SS Great Britain")
-                        .font(.system(size: 50))
+                        .font(.system(size: 40))
                         .bold()
                         .padding([.leading], 25)
                     Text("Instructions for Getting Started")
-                        .font(.system(size: 40))
+                        .font(.system(size: 30))
                         .multilineTextAlignment(.leading)
+                        .padding([.leading], -90)
                 }
-                .frame(width: 680, height: 100, alignment: .leading)
+                .frame(width: 600, height: 150, alignment: .leading)
                 Spacer()
                 Button(action: goToInstructions){
                     Text("Instruction Page")
-                        .font(.system(size: 40))
+                        .font(.system(size: 30))
                         .multilineTextAlignment(.trailing)
-                        .padding([.leading, . bottom], 40)
-                        .padding([.leading], 20)
+                        .frame(width: 230)
                     Image(systemName: "questionmark")
-                        .font(.system(size: 45))
+                        .font(.system(size: 35))
                         .multilineTextAlignment(.trailing)
-                        .padding([.bottom], 40)
+                        
                 }
             }
             .frame(minWidth: 0, maxWidth: .infinity)
@@ -47,33 +46,33 @@ struct ContentView: View {
             .background(Color.red)
             VStack {
                 Text("Welcome to the SS Great Britain.").bold()
-                    .font(.system(size: 60)).font(.largeTitle).padding([.leading], 80).padding([.bottom, .top], 30)
+                    .font(.system(size: 50)).font(.largeTitle).padding([.leading], 50).padding([.bottom, .top], 20)
                 Text("Table of Contents for Instructions")
-                    .font(.system(size: 50)).font(.title).padding([.leading], 20)
+                    .font(.system(size: 40)).font(.title).padding([.leading], 20)
                 VStack{
                     let steps: String = "1. Roles\n2. How to use the Telescope\n3. How to use the Map\n4. How to make an Accessibiliy Report"
                     Text(steps)
-                        .font(.system(size: 50))
-                        .frame(width: 900, height: 300, alignment: .leading)
+                        .font(.system(size: 40))
+                        .frame(width: 900, height: 230, alignment: .leading)
                 }
                 Button(action: goToMap) {
                 HStack(alignment: .center){
                     Text("Skip Instructions and Go to Map")
-                        .font(.system(size: 50))
+                        .font(.system(size: 40))
                         .foregroundColor(Color.red)
                         .padding()
                     Image(systemName: "arrow.right")
                         .foregroundColor(Color.red)
-                        .font(.system(size: 50))
+                        .font(.system(size: 40))
                     }
                 }
                 .padding()
                 HStack {
                     Spacer()
                     Button(action: goToRoles){ Text("1. Roles")
-                            .font(.system(size: 50))
+                            .font(.system(size: 40))
                         Image(systemName: "arrow.right")
-                            .font(.system(size: 55))
+                            .font(.system(size: 40))
                     }
                 } // CLosing the Roles button
                 .padding([.top], 15)
