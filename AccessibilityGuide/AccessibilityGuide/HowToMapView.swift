@@ -1,13 +1,13 @@
 //
-//  TelescopeView.swift
+//  HowToMapView.swift
 //  AccessibilityGuide
 //
-//  Created by Grace Stangroome on 13/09/2023.
+//  Created by Grace Stangroome on 29/09/2023.
 //
 
 import SwiftUI
 
-struct TelescopeView: View {
+struct HowToMapView: View {
     var body: some View {
         VStack {
             HStack{
@@ -58,7 +58,7 @@ struct TelescopeView: View {
             .background(Color.red)
             
             VStack { // Opening the rest of the page
-                Text("Step 2: How to use the Telescope").font(.system(size: 37)).frame(maxWidth: .infinity, alignment: .leading)
+                Text("Step 3: How to use the Map").font(.system(size: 37)).frame(maxWidth: .infinity, alignment: .leading)
                     .padding([.leading], 20)
                 Text(" ").frame(width: 2000, height: 10, alignment: .leading)
                     .background(Color.red)
@@ -67,51 +67,36 @@ struct TelescopeView: View {
                     .frame(maxWidth: .infinity, alignment: .leading)
                         .padding([.leading], 20)
                         .padding([.bottom], -10)
-                HStack {
-                    Text("The Telescope should vibrate when close to any markers on the map. \n If it doesn’t vibrate, bring it to staff so they can assess any issues. \n After it vibrates, expand the telescope to reveal more information.")
-                        .font(.system(size: 23))
-                        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
-                        .padding([.leading], 20)
-                    Button(action: testVibration){
-                        Text("Test \n Vibration").font(.system(size: 30))
-                            .bold()
-                            .frame(width: 160, height: 110, alignment: .center)
-                            .foregroundColor(Color.white)
-                            .background(Color.red)
-                            .padding([.trailing], 70)
-                            .padding([.top], -30)
-                    }
-                }
+                Text("The telescope will automatically change the map to indicate your location. \n You can also manually change the location using a location menu. \n \n When the Telescope vibrates, the marker on the map you are closest to will blink. \n  You can touch the markers to see what they indicate. \n Or you can ask the Navigator to expand the Telescope to pop up further information.The telescope will automatically change the map to indicate your location.")
+                    .font(.system(size: 23))
+                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
+                    .padding([.leading], 20)
                 Text(" ").frame(width: 2000, height: 10, alignment: .leading)
                     .background(Color.red)
-                Text("To take photos for accessibility reports").bold().font(.system(size: 27))
+                Text("Viewing photos").bold().font(.system(size: 27))
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding([.leading], 20)
                     .padding([.bottom], 10)
-                Text("If you see an accessibility issue you would like staff to be aware of, point the Telescope at the issue and push the button on the telescope to take a photo. The image will then pop up on the Tablet with instructions. ").font(.system(size: 23)).padding([.leading, .trailing])
+                Text("When the Captain takes a photo with the Telescope, it will appear as a pop up on the tablet. Choosing “retake” with close the pop up and erase the image, else you can choose to use the image to make an accessibility report.").font(.system(size: 23)).padding([.leading, .trailing])
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
                     .padding([.leading], 5)
-                Text("If you do not like the picture, have the Captain choose “retake.” This will close the image on the Tablet. Once the image is closed the Telescope can take another photo.").font(.system(size: 23))
-                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
-                        .padding([.leading], 20)
                 HStack { // OPening the Footer
                     Spacer()
-                    Button(action: goToRoles){
+                    Button(action: goToTelescope){
                         Image(systemName: "arrow.left")
                             .font(.system(size: 32))
-                        Text("1. Roles")
+                        Text("2. How to use the Telescope")
                             .font(.system(size: 32))
                     } // Closing first button
-                    .padding([.leading], -100)
+                    .padding([.leading], -20)
                     Spacer()
-                    Button(action: goToHowMapView){
-                        Text("3. How to use the Map")
+                    Button(action: goToAccessibilityReport){
+                        Text("4. How to make an Accessibility report")
                             .font(.system(size: 32))
                             .multilineTextAlignment(.leading)
                         Image(systemName: "arrow.right")
                             .font(.system(size: 32))
                     } // Closing the second button
-                    .padding([.leading], 400)
                 } // Closing the footer
                 .padding([.top], 15)
                 .multilineTextAlignment(.trailing)
@@ -124,22 +109,15 @@ struct TelescopeView: View {
     } // CLosing the body
 } // Closing the View
 
-func testVibration() {
-    print("Beep Boop testing vibration!")
-    let mqttmanager = MQTTManager()
-    mqttmanager.publish(topic: "messagesFromiPad", content: "vibrate")
-    print("Finished on my end!")
-}
-
-func goToHowMapView() {
+func goToAccessibilityReport() {
     if let window = UIApplication.shared.windows.first {
-        window.rootViewController = UIHostingController(rootView: HowToMapView())
+        window.rootViewController = UIHostingController(rootView: HowToAccessibilityReportView())
         window.makeKeyAndVisible()
     }
 }
 
-struct TelescopeView_Previews: PreviewProvider {
+struct HowToMapView_Previews: PreviewProvider {
     static var previews: some View {
-        TelescopeView()
+        HowToMapView()
     }
 }

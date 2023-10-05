@@ -90,7 +90,7 @@ struct LowerDeckMapView: View {
                     .resizable(capInsets: EdgeInsets(top: 0.0, leading: 0.0, bottom: 0.0, trailing: 0.0))
                     .frame(width: 1000, height: 400)
                 .padding()
-                HStack {
+                Button(action: makeAccessibilityReport) {
                     Text("Accessibility needs are different for everyone\nclick HERE to make an accessibility report without a photo")
                         .font(.system(size: 25)).bold()
                         .padding([.bottom], 30)

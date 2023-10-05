@@ -63,10 +63,18 @@ struct mapView: View {
                 }
                 .padding([.leading], 200)
                 .frame(minWidth: 0, maxWidth: .infinity)
-                Image(systemName: "rectangle")
-                    .resizable(capInsets: EdgeInsets(top: 0.0, leading: 0.0, bottom: 0.0, trailing: 0.0))
-                    .frame(width: 1000, height: 400)
-                HStack {
+                Button(action: doNothing) {
+                    Text(" ")
+                        .padding([.top, .bottom], 200)
+                               .padding([.leading, .trailing], 500)
+                               .background(
+                                   RoundedRectangle(cornerRadius: 10)
+                                       .stroke(lineWidth: 3)
+                                       .background(Color.white)
+                               )
+                               .foregroundColor(Color.black)
+                }
+                Button(action: makeAccessibilityReport) {
                     Text("Accessibility needs are different for everyone\nclick HERE to make an accessibility report without a photo")
                         .font(.system(size: 25)).bold()
 
@@ -97,6 +105,16 @@ func goToLowerDeck() {
     }
 }
 
+func makeAccessibilityReport() {
+    if let window = UIApplication.shared.windows.first {
+        window.rootViewController = UIHostingController(rootView: AccessibiltyReportUI())
+        window.makeKeyAndVisible()
+    }
+}
+
+func doNothing() {
+    print(" ")
+}
 
 
 struct mapView_Previews: PreviewProvider {

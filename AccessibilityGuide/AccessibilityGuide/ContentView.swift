@@ -70,9 +70,9 @@ struct ContentView: View {
                 HStack {
                     Spacer()
                     Button(action: goToRoles){ Text("1. Roles")
-                            .font(.system(size: 40))
+                            .font(.system(size: 32))
                         Image(systemName: "arrow.right")
-                            .font(.system(size: 40))
+                            .font(.system(size:32))
                     }
                 } // CLosing the Roles button
                 .padding([.top], 15)
@@ -100,7 +100,7 @@ func goToMap() {
     let mqttmanager = MQTTManager()
     mqttmanager.connect()
     mqttmanager.subscribe(toTopic: "messagesforiPad")
-    mqttmanager.publish(topic: "messagesFromiPad", content: "iPad connected")
+    mqttmanager.publish(topic: "messagesforiPad", content: "iPad connected")
     
     
     /// _ mqtt5: CocoaMQTT5, didReceiveAuthReasonCode reasonCode: CocoaMQTTAUTHReasonCode

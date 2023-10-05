@@ -10,7 +10,7 @@ import CocoaMQTT
 
 class MQTTManager {
     
-    let mqtt = CocoaMQTT(clientID: "iPad", host: "192.168.86.164", port: 1883)
+    let mqtt = CocoaMQTT(clientID: "iPad", host: "192.169.0.12", port: 1883)
     
     init() {
         configureMQTT()
@@ -32,6 +32,7 @@ class MQTTManager {
         print("Connected to \(host) on port \(port)")
     }
     
+    // unsuccessful connection
     func mqtt(_ mqtt: CocoaMQTT, withError err: Error?) {
         if let error = err {
             print("Disconnected with error: \(error.localizedDescription)")
@@ -58,8 +59,23 @@ class MQTTManager {
         }
     }
     
+    func mqttDidDisconnect(_ mqtt: CocoaMQTT, withError err: Error?) {
+        let maxReconnectAttempts = 10
+        var reconnectAttempts = 0
+        if reconnectAttempts < maxReconnectAttempts {
+            let backoffTime = pow(2.0, Double(reconnectAttempts)) * 5
+            DispatchQueue.global().asyncAfter(deadline: .now() + backoffTime) {
+                reconnectAttempts += 1
+                mqtt.connect()
+            }
+        } else {
+            print("Reached maximum reconnection attempts.")
+        }
+    }
+    
     func connect() {
-        mqtt.connect()
+        let result = mqtt.connect()
+        print("Connection was successful? \(result)")
     }
     
     func subscribe(toTopic topic: String) {

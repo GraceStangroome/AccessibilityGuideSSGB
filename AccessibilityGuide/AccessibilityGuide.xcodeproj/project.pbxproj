@@ -17,6 +17,9 @@
 		C9093A892A7AABA100E00131 /* AccessibilityGuideUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9093A882A7AABA100E00131 /* AccessibilityGuideUITestsLaunchTests.swift */; };
 		C9093A962A7AB0D200E00131 /* mapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9093A952A7AB0D200E00131 /* mapView.swift */; };
 		C9093A982AA882D200E00131 /* LowerDeckMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9093A972AA882D200E00131 /* LowerDeckMapView.swift */; };
+		C996FB842AC6F8F900B5EA77 /* HowToMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C996FB832AC6F8F900B5EA77 /* HowToMapView.swift */; };
+		C996FB862AC6FBD400B5EA77 /* HowToAccessibilityReportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C996FB852AC6FBD400B5EA77 /* HowToAccessibilityReportView.swift */; };
+		C996FB882AC7035500B5EA77 /* AccessibiltyReportUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = C996FB872AC7035500B5EA77 /* AccessibiltyReportUI.swift */; };
 		C9BB286C2AB3064B0030E5EC /* MQTTManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9BB286B2AB3064B0030E5EC /* MQTTManager.swift */; };
 		C9BB289D2AB8A5830030E5EC /* PopUpWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9BB289C2AB8A5830030E5EC /* PopUpWindow.swift */; };
 		C9D062E02AB1C9A0007190A7 /* RoleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9D062DF2AB1C9A0007190A7 /* RoleView.swift */; };
@@ -72,6 +75,9 @@
 		C9093A952A7AB0D200E00131 /* mapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mapView.swift; sourceTree = "<group>"; };
 		C9093A972AA882D200E00131 /* LowerDeckMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LowerDeckMapView.swift; sourceTree = "<group>"; usesTabs = 0; };
 		C92318E82AC61EBB00EAD69C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		C996FB832AC6F8F900B5EA77 /* HowToMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HowToMapView.swift; sourceTree = "<group>"; };
+		C996FB852AC6FBD400B5EA77 /* HowToAccessibilityReportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HowToAccessibilityReportView.swift; sourceTree = "<group>"; };
+		C996FB872AC7035500B5EA77 /* AccessibiltyReportUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessibiltyReportUI.swift; sourceTree = "<group>"; };
 		C9BB286B2AB3064B0030E5EC /* MQTTManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MQTTManager.swift; sourceTree = "<group>"; };
 		C9BB289C2AB8A5830030E5EC /* PopUpWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpWindow.swift; sourceTree = "<group>"; };
 		C9D062DF2AB1C9A0007190A7 /* RoleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoleView.swift; sourceTree = "<group>"; };
@@ -141,15 +147,18 @@
 			isa = PBXGroup;
 			children = (
 				C92318E82AC61EBB00EAD69C /* Info.plist */,
-				C9D062E12AB1D069007190A7 /* TelescopeView.swift */,
 				C9093A6A2A7AABA000E00131 /* AccessibilityGuideApp.swift */,
+				C996FB832AC6F8F900B5EA77 /* HowToMapView.swift */,
+				C9D062E12AB1D069007190A7 /* TelescopeView.swift */,
 				C9093A972AA882D200E00131 /* LowerDeckMapView.swift */,
 				C9093A6C2A7AABA000E00131 /* ContentView.swift */,
 				C9093A952A7AB0D200E00131 /* mapView.swift */,
+				C996FB852AC6FBD400B5EA77 /* HowToAccessibilityReportView.swift */,
+				C9D062DF2AB1C9A0007190A7 /* RoleView.swift */,
+				C996FB872AC7035500B5EA77 /* AccessibiltyReportUI.swift */,
 				C9093A6E2A7AABA100E00131 /* Assets.xcassets */,
 				C9093A702A7AABA100E00131 /* AccessibilityGuide.entitlements */,
 				C9093A712A7AABA100E00131 /* Preview Content */,
-				C9D062DF2AB1C9A0007190A7 /* RoleView.swift */,
 				C9BB286B2AB3064B0030E5EC /* MQTTManager.swift */,
 				C9BB289C2AB8A5830030E5EC /* PopUpWindow.swift */,
 				C9D7F48E2ABC5F9A006F9F28 /* RFIDManager.swift */,
@@ -367,14 +376,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C996FB882AC7035500B5EA77 /* AccessibiltyReportUI.swift in Sources */,
 				C9D7F48F2ABC5F9A006F9F28 /* RFIDManager.swift in Sources */,
 				C9BB289D2AB8A5830030E5EC /* PopUpWindow.swift in Sources */,
 				C9093A962A7AB0D200E00131 /* mapView.swift in Sources */,
 				C9093A6D2A7AABA000E00131 /* ContentView.swift in Sources */,
 				C9093A6B2A7AABA000E00131 /* AccessibilityGuideApp.swift in Sources */,
 				C9D7F4912ABC7D15006F9F28 /* RFIDMessage.swift in Sources */,
+				C996FB842AC6F8F900B5EA77 /* HowToMapView.swift in Sources */,
 				C9D062E02AB1C9A0007190A7 /* RoleView.swift in Sources */,
 				C9BB286C2AB3064B0030E5EC /* MQTTManager.swift in Sources */,
+				C996FB862AC6FBD400B5EA77 /* HowToAccessibilityReportView.swift in Sources */,
 				C9093A982AA882D200E00131 /* LowerDeckMapView.swift in Sources */,
 				C9D062E22AB1D069007190A7 /* TelescopeView.swift in Sources */,
 			);
@@ -538,6 +550,7 @@
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = AccessibilityGuide/Info.plist;
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Allows user to record a voice note to describe the need noticed.";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -549,7 +562,7 @@
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "";
 				MACOSX_DEPLOYMENT_TARGET = 13.3;
 				MARKETING_VERSION = 1.0;
@@ -582,6 +595,7 @@
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = AccessibilityGuide/Info.plist;
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Allows user to record a voice note to describe the need noticed.";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -593,7 +607,7 @@
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "";
 				MACOSX_DEPLOYMENT_TARGET = 13.3;
 				MARKETING_VERSION = 1.0;

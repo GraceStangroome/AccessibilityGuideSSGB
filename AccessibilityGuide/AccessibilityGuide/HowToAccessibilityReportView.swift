@@ -1,13 +1,13 @@
 //
-//  RolePage.swift
+//  HowToAccessibilityReportView.swift
 //  AccessibilityGuide
 //
-//  Created by Grace Stangroome on 13/09/2023.
+//  Created by Grace Stangroome on 29/09/2023.
 //
 
 import SwiftUI
 
-struct RoleView: View {
+struct HowToAccessibilityReportView: View {
     var body: some View {
         VStack {
             HStack{
@@ -15,27 +15,27 @@ struct RoleView: View {
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 150, height: 150, alignment: .leading)
-
                 VStack{
                     Text("Guide for the SS Great Britain")
                         .font(.system(size: 40))
                         .bold()
                         .padding([.leading], 25)
-                    Text("Choosing Roles")
+                    Text("Using the Telescope")
                         .font(.system(size: 30))
                         .multilineTextAlignment(.leading)
-                        .padding([.leading], -90)
+                        .padding([.leading], -230)
                 }
-                .frame(width: 570, height: 100, alignment: .leading)
+                .frame(width: 550, height: 0, alignment: .leading)
                 Spacer()
                 VStack{
                         Button(action: goToInstructions){
                             Text("Instruction Page")
                                 .font(.system(size: 30))
                                 .multilineTextAlignment(.trailing)
+                                .padding([.leading], 40)
                                 .padding([.leading, .top], 20)
                             Image(systemName: "questionmark")
-                                .font(.system(size: 30))
+                                .font(.system(size: 45))
                                 .multilineTextAlignment(.trailing)
                                 .padding([.top], 20)
                         } // Closing Instruciton button
@@ -48,38 +48,49 @@ struct RoleView: View {
                             .font(.system(size: 30))
                             .multilineTextAlignment(.trailing)
                     } // Closing the Button
-                    .padding([.bottom], 40)
-                    .padding([.trailing], -150)
+                    .padding([.bottom], 0)
+                    .padding([.trailing], -200)
                 } // Closing the VStack of two buttons
             } // Closing Header
             .frame(minWidth: 0, maxWidth: .infinity)
-            .padding([.leading, .trailing])
+            .padding([.leading, .trailing, .bottom,])
             .foregroundColor(Color.white)
             .background(Color.red)
             
             VStack { // Opening the rest of the page
-                Spacer()
-                Image("Step1Roles")
-                    .resizable(capInsets: EdgeInsets(top: 0.0, leading: 0.0, bottom: 0.0, trailing: 0.0))
-                    .frame(width: 1000, height: 500)
-                Spacer()
-                HStack {
+                Text("Step 4: How to make an Accessibilty Report").font(.system(size: 37)).frame(maxWidth: .infinity, alignment: .leading)
+                    .padding([.leading], 20)
+                Text(" ").frame(width: 2000, height: 10, alignment: .leading)
+                    .background(Color.red)
+                Text("Make an Accessibility Report when either the Navigator or Captain spots something that you think this guide has missed. Making reports can help improve everyone’s understanding of accessibility!")
+                    .font(.system(size: 23))
+                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
+                    .padding([.leading], 20)
+                Text("Examples:").bold().font(.system(size:23))
+                Text("“This floor looks slippery, but it is just glossy” \n “This room has an echo which makes it noisy”").font(.system(size:23))
+                Text("Taking a picture can help staff identify better areas with issues. \n Although you can make reports without a picture.").font(.system(size: 23)).padding([.leading, .trailing])
+                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
+                    .padding([.leading], 5)
+                Text("Once you take a photo, and touch “Make a Report,” you will be taken to a report screen. This screen will ask for the general location, a general categorization of the issue, and a brief description. Submitting a report will send your answers anonymously to staff to review.").font(.system(size: 23))
+                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
+                        .padding([.leading], 20)
+                HStack { // OPening the Footer
                     Spacer()
-                    Button(action: goToInstructions){
+                    Button(action: goToHowMapView){
                         Image(systemName: "arrow.left")
                             .font(.system(size: 32))
-                        Text("Instruction Page")
+                        Text("3. How to use the Map")
                             .font(.system(size: 32))
                     } // Closing first button
-                    .padding([.leading], -290)
                     Spacer()
-                    Button(action: goToTelescope){
-                        Text("2. How to use the Telescope")
+                        .padding([.leading], -40)
+                    Button(action: goToMap){
+                        Text("Go to map")
                             .font(.system(size: 32))
+                            .multilineTextAlignment(.leading)
                         Image(systemName: "arrow.right")
                             .font(.system(size: 32))
                     } // Closing the second button
-
                 } // Closing the footer
                 .padding([.top], 15)
                 .multilineTextAlignment(.trailing)
@@ -93,17 +104,8 @@ struct RoleView: View {
 } // Closing the View
 
 
-func goToTelescope() {
-    if let window = UIApplication.shared.windows.first {
-        window.rootViewController = UIHostingController(rootView: TelescopeView())
-        window.makeKeyAndVisible()
-    }
-}
-
-
-
-struct RoleView_Previews: PreviewProvider {
+struct HowToAccessibilityReportView_Previews: PreviewProvider {
     static var previews: some View {
-        RoleView()
+        HowToAccessibilityReportView()
     }
 }
