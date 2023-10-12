@@ -99,9 +99,8 @@ func goToMap() {
     print("Got here")
     let mqttmanager = MQTTManager()
     mqttmanager.connect()
-    mqttmanager.subscribe(toTopic: "messagesforiPad")
-    mqttmanager.publish(topic: "messagesforiPad", content: "iPad connected")
-    
+    mqttmanager.subscribe(toTopic: "MessagesforiPad")
+    mqttmanager.publish(topic: "MessagesforiPad", content: "connection successful")
     
     /// _ mqtt5: CocoaMQTT5, didReceiveAuthReasonCode reasonCode: CocoaMQTTAUTHReasonCode
     

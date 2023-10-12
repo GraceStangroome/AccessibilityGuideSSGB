@@ -9,15 +9,24 @@
 import CocoaMQTT
 
 class MQTTManager {
-    
     let mqtt = CocoaMQTT(clientID: "iPad", host: "raspberrypi.local", port: 1883)
+    var setupOccured = Bool(false)
     
     init() {
+        mqttSettingList()
+    }
+    
+    func mqttSettingList() {
+        print("Configuring")
         configureMQTT()
+        mqttWebsocketsSetting()
+        setupOccured = true
     }
     
     func configureMQTT() {
+        print("Setting up MQTT")
         // Configure connection and message handlers here
+        let mqtt = CocoaMQTT(clientID: "iPad", host: "raspberrypi.local", port: 1883)
         mqtt.logLevel = .debug
         mqtt.username = "iPad"
         mqtt.password = "Apple!"
@@ -27,12 +36,30 @@ class MQTTManager {
         mqtt.keepAlive = 60
         mqtt.autoReconnect = true
         mqtt.autoReconnectTimeInterval = 5
-        mqtt.delegate = self
+        mqtt.enableSSL = false
+        mqtt.allowUntrustCACertificate = true
+        let delegator = MQTTManagerDelegate()
+        mqtt.delegate = delegator
+    }
+    
+    func mqttWebsocketsSetting() {
+        let clientID = "iPad"
+        let websocket = CocoaMQTTWebSocket(uri: "/mqtt")
+        let mqtt = CocoaMQTT(clientID: clientID, host: "raspberrypi.local", port: 8083, socket: websocket)
+        mqtt.username = "iPad"
+        mqtt.password = "Apple!"
+        mqtt.willMessage = CocoaMQTTMessage(topic: "/will", string: "dieout")
+        mqtt.keepAlive = 60
+        let delegator = MQTTManagerDelegate()
+        mqtt.delegate = delegator
     }
     
     func connect() {
-        let result = mqtt.connect()
-        print("Connection was successful? \(result)")
+        print("connecting...")
+        if !setupOccured {
+            mqttSettingList()
+        }
+        _ = mqtt.connect()
     }
     
     func subscribe(toTopic topic: String) {
@@ -41,66 +68,56 @@ class MQTTManager {
     }
     
     func publish(topic: String, content: String) {
+        print("Publishing: \(content) to topic \(topic)")
         let array : [UInt8] = Array(content.utf8)
-        let message = CocoaMQTTMessage(topic: topic, payload: array, qos: CocoaMQTTQoS.qos2, retained: true)
+        let message = CocoaMQTTMessage(topic: topic, payload: array, qos: CocoaMQTTQoS.qos1, retained: true)
         mqtt.publish(message)
+    }
+    
+    func disconnect() {
+        print("DISCONNECT OCCURED")
+        mqtt.disconnect()
     }
 }
     
-extension MQTTManager: CocoaMQTTDelegate {
-    func mqttUrlSession(_ mqtt: CocoaMQTT, didReceiveTrust trust: SecTrust, didReceiveChallenge challenge: URLAuthenticationChallenge, completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void){
-        if (challenge.protectionSpace.authenticationMethod == NSURLAuthenticationMethodServerTrust) {
-            let myCert = "myCert"
-            let certData = Data(base64Encoded: myCert as String)!
-
-            if let trust = challenge.protectionSpace.serverTrust,
-               let cert = SecCertificateCreateWithData(nil,  certData as CFData) {
-                let certs = [cert]
-                SecTrustSetAnchorCertificates(trust, certs as CFArray)
-
-                completionHandler(URLSession.AuthChallengeDisposition.useCredential, URLCredential(trust: trust))
-                return
-            }
-        }
-
-        completionHandler(URLSession.AuthChallengeDisposition.cancelAuthenticationChallenge, nil)
-
-    }
-
-
+class MQTTManagerDelegate: CocoaMQTTDelegate {
     func mqtt(_ mqtt: CocoaMQTT, didConnectAck ack: CocoaMQTTConnAck) {
+        print("CONNECTION OCCURED")
+        print(ack)
         TRACE("ack: \(ack)")
-        func mqtt(_ mqtt: CocoaMQTT, didConnectAck ack: CocoaMQTTConnAck) {
-            switch ack {
-            case .accept:
-                print("Connection accepted. You are now connected to the broker.")
-                mqtt.subscribe("messagesforiPad", qos: CocoaMQTTQoS.qos1)
-            case .unacceptableProtocolVersion:
-                print("Connection refused: Unacceptable protocol version")
-                // Handle the error appropriately.
-            case .identifierRejected:
-                print("Connection refused: Identifier rejected")
-                // Handle the error appropriately.
-            case .serverUnavailable:
-                print("Connection refused: Server unavailable")
-                // Handle the error appropriately.
-            case .badUsernameOrPassword:
-                print("Connection refused: Bad username or password")
-                // Handle the error appropriately.
-            case .notAuthorized:
-                print("Connection refused: Not authorized")
-                // Handle the error appropriately.
-            case .reserved: // unusure what this case means but it was missing
-                print("Connection refused: Reserved")
-            }
+        switch ack {
+        case .accept:
+            print("Connection accepted. You are now connected to the broker.")
+            mqtt.subscribe("messagesforiPad", qos: CocoaMQTTQoS.qos1)
+            let message = CocoaMQTTMessage(topic: "MessagesFromiPad", string: "Connection successful", qos: CocoaMQTTQoS.qos1)
+            mqtt.publish(message)
+        case .unacceptableProtocolVersion:
+            print("Connection refused: Unacceptable protocol version")
+            // Handle the error appropriately.
+        case .identifierRejected:
+            print("Connection refused: Identifier rejected")
+            // Handle the error appropriately.
+        case .serverUnavailable:
+            print("Connection refused: Server unavailable")
+            // Handle the error appropriately.
+        case .badUsernameOrPassword:
+            print("Connection refused: Bad username or password")
+            // Handle the error appropriately.
+        case .notAuthorized:
+            print("Connection refused: Not authorized")
+            // Handle the error appropriately.
+        case .reserved: // unusure what this case means but it was missing
+            print("Connection refused: Reserved")
         }
     }
 
     func mqtt(_ mqtt: CocoaMQTT, didStateChangeTo state: CocoaMQTTConnState) {
+        print("NEW STATE")
         TRACE("new state: \(state)")
     }
 
     func mqtt(_ mqtt: CocoaMQTT, didPublishMessage message: CocoaMQTTMessage, id: UInt16) {
+        print("PUBLISHED")
         if let messageText = message.string {
             TRACE("message: \(message.string!.description), id: \(id)") // we can force it because the if statement safely checks for it
         } else {
@@ -109,6 +126,7 @@ extension MQTTManager: CocoaMQTTDelegate {
     }
 
     func mqtt(_ mqtt: CocoaMQTT, didPublishAck id: UInt16) {
+        print("PUBLISHING")
         TRACE("id: \(id)")
     }
 
@@ -153,22 +171,29 @@ extension MQTTManager: CocoaMQTTDelegate {
     }
 
     func mqttDidDisconnect(_ mqtt: CocoaMQTT, withError err: Error?) {
-        TRACE("\(String(describing: err))")
-        let maxReconnectAttempts = 10
-        var reconnectAttempts = 0
-        if reconnectAttempts < maxReconnectAttempts {
-            let backoffTime = pow(2.0, Double(reconnectAttempts)) * 5
-            DispatchQueue.global().asyncAfter(deadline: .now() + backoffTime) {
-                reconnectAttempts += 1
-                mqtt.connect()
+        if let error = err {
+            TRACE("\(String(describing: err))")
+            print("Disconnected with error \(String(describing: err))")
+            let maxReconnectAttempts = 10
+            var reconnectAttempts = 0
+            while reconnectAttempts < maxReconnectAttempts {
+                let backoffTime = pow(2.0, Double(reconnectAttempts)) * 5
+                DispatchQueue.global().asyncAfter(deadline: .now() + backoffTime) {
+                    reconnectAttempts += 1
+                    _ = mqtt.connect()
+                    print("attempted recconection")
+                }
             }
-        } else {
             print("Reached maximum reconnection attempts.")
+        } else {
+            print("MQTT Disconnected")
+            _ = mqtt.connect()
         }
     }
+    
 }
 
-extension MQTTManager {
+extension MQTTManagerDelegate {
     func TRACE(_ message: String = "", fun: String = #function) {
         let names = fun.components(separatedBy: ":")
         var prettyName: String
@@ -183,6 +208,15 @@ extension MQTTManager {
         }
 
         print("[TRACE] [\(prettyName)]: \(message)")
+    }
+}
+
+extension Optional {
+    var description: String {
+        if let self = self {
+            return "\(self)"
+        }
+        return ""
     }
 }
 

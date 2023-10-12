@@ -24,6 +24,7 @@
 		C9BB289D2AB8A5830030E5EC /* PopUpWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9BB289C2AB8A5830030E5EC /* PopUpWindow.swift */; };
 		C9D062E02AB1C9A0007190A7 /* RoleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9D062DF2AB1C9A0007190A7 /* RoleView.swift */; };
 		C9D062E22AB1D069007190A7 /* TelescopeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9D062E12AB1D069007190A7 /* TelescopeView.swift */; };
+		C9D30D322AD7044C00AFE90E /* PopUpWindowWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9D30D312AD7044C00AFE90E /* PopUpWindowWrapper.swift */; };
 		C9D7F48F2ABC5F9A006F9F28 /* RFIDManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9D7F48E2ABC5F9A006F9F28 /* RFIDManager.swift */; };
 		C9D7F4912ABC7D15006F9F28 /* RFIDMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9D7F4902ABC7D15006F9F28 /* RFIDMessage.swift */; };
 /* End PBXBuildFile section */
@@ -82,6 +83,7 @@
 		C9BB289C2AB8A5830030E5EC /* PopUpWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpWindow.swift; sourceTree = "<group>"; };
 		C9D062DF2AB1C9A0007190A7 /* RoleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoleView.swift; sourceTree = "<group>"; };
 		C9D062E12AB1D069007190A7 /* TelescopeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TelescopeView.swift; sourceTree = "<group>"; };
+		C9D30D312AD7044C00AFE90E /* PopUpWindowWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpWindowWrapper.swift; sourceTree = "<group>"; };
 		C9D7F48E2ABC5F9A006F9F28 /* RFIDManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RFIDManager.swift; sourceTree = "<group>"; };
 		C9D7F4902ABC7D15006F9F28 /* RFIDMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RFIDMessage.swift; sourceTree = "<group>"; };
 		FE74FCD165C7E765518F1BF1 /* Pods_AccessibilityGuide.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AccessibilityGuide.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -161,6 +163,7 @@
 				C9093A712A7AABA100E00131 /* Preview Content */,
 				C9BB286B2AB3064B0030E5EC /* MQTTManager.swift */,
 				C9BB289C2AB8A5830030E5EC /* PopUpWindow.swift */,
+				C9D30D312AD7044C00AFE90E /* PopUpWindowWrapper.swift */,
 				C9D7F48E2ABC5F9A006F9F28 /* RFIDManager.swift */,
 				C9D7F4902ABC7D15006F9F28 /* RFIDMessage.swift */,
 			);
@@ -382,6 +385,7 @@
 				C9093A962A7AB0D200E00131 /* mapView.swift in Sources */,
 				C9093A6D2A7AABA000E00131 /* ContentView.swift in Sources */,
 				C9093A6B2A7AABA000E00131 /* AccessibilityGuideApp.swift in Sources */,
+				C9D30D322AD7044C00AFE90E /* PopUpWindowWrapper.swift in Sources */,
 				C9D7F4912ABC7D15006F9F28 /* RFIDMessage.swift in Sources */,
 				C996FB842AC6F8F900B5EA77 /* HowToMapView.swift in Sources */,
 				C9D062E02AB1C9A0007190A7 /* RoleView.swift in Sources */,
