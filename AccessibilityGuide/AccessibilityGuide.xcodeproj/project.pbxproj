@@ -25,6 +25,7 @@
 		C9D062E02AB1C9A0007190A7 /* RoleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9D062DF2AB1C9A0007190A7 /* RoleView.swift */; };
 		C9D062E22AB1D069007190A7 /* TelescopeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9D062E12AB1D069007190A7 /* TelescopeView.swift */; };
 		C9D30D322AD7044C00AFE90E /* PopUpWindowWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9D30D312AD7044C00AFE90E /* PopUpWindowWrapper.swift */; };
+		C9D30D362AD9544500AFE90E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9D30D352AD9544500AFE90E /* ViewController.swift */; };
 		C9D7F48F2ABC5F9A006F9F28 /* RFIDManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9D7F48E2ABC5F9A006F9F28 /* RFIDManager.swift */; };
 		C9D7F4912ABC7D15006F9F28 /* RFIDMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9D7F4902ABC7D15006F9F28 /* RFIDMessage.swift */; };
 /* End PBXBuildFile section */
@@ -84,6 +85,7 @@
 		C9D062DF2AB1C9A0007190A7 /* RoleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoleView.swift; sourceTree = "<group>"; };
 		C9D062E12AB1D069007190A7 /* TelescopeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TelescopeView.swift; sourceTree = "<group>"; };
 		C9D30D312AD7044C00AFE90E /* PopUpWindowWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpWindowWrapper.swift; sourceTree = "<group>"; };
+		C9D30D352AD9544500AFE90E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		C9D7F48E2ABC5F9A006F9F28 /* RFIDManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RFIDManager.swift; sourceTree = "<group>"; };
 		C9D7F4902ABC7D15006F9F28 /* RFIDMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RFIDMessage.swift; sourceTree = "<group>"; };
 		FE74FCD165C7E765518F1BF1 /* Pods_AccessibilityGuide.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AccessibilityGuide.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -166,6 +168,7 @@
 				C9D30D312AD7044C00AFE90E /* PopUpWindowWrapper.swift */,
 				C9D7F48E2ABC5F9A006F9F28 /* RFIDManager.swift */,
 				C9D7F4902ABC7D15006F9F28 /* RFIDMessage.swift */,
+				C9D30D352AD9544500AFE90E /* ViewController.swift */,
 			);
 			path = AccessibilityGuide;
 			sourceTree = "<group>";
@@ -271,7 +274,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1430;
-				LastUpgradeCheck = 1430;
+				LastUpgradeCheck = 1500;
 				TargetAttributes = {
 					C9093A662A7AABA000E00131 = {
 						CreatedOnToolsVersion = 14.3.1;
@@ -379,6 +382,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C9D30D362AD9544500AFE90E /* ViewController.swift in Sources */,
 				C996FB882AC7035500B5EA77 /* AccessibiltyReportUI.swift in Sources */,
 				C9D7F48F2ABC5F9A006F9F28 /* RFIDManager.swift in Sources */,
 				C9BB289D2AB8A5830030E5EC /* PopUpWindow.swift in Sources */,
@@ -462,9 +466,11 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -520,9 +526,11 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -548,8 +556,10 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"AccessibilityGuide/Preview Content\"";
 				DEVELOPMENT_TEAM = YTPVXV955L;
+				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GENERATE_INFOPLIST_FILE = YES;
@@ -593,8 +603,10 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"AccessibilityGuide/Preview Content\"";
 				DEVELOPMENT_TEAM = YTPVXV955L;
+				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GENERATE_INFOPLIST_FILE = YES;
@@ -635,6 +647,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = YTPVXV955L;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
@@ -660,6 +673,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = YTPVXV955L;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.2;

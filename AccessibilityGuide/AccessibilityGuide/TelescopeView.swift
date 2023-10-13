@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct TelescopeView: View {
+    @State var viewController = ViewController()
     var body: some View {
         VStack {
             HStack{
@@ -28,7 +29,7 @@ struct TelescopeView: View {
                 .frame(width: 550, height: 0, alignment: .leading)
                 Spacer()
                 VStack{
-                        Button(action: goToInstructions){
+                    Button(action: viewController.goToInstructions){
                             Text("Instruction Page")
                                 .font(.system(size: 30))
                                 .multilineTextAlignment(.trailing)
@@ -40,7 +41,7 @@ struct TelescopeView: View {
                                 .padding([.top], 20)
                         } // Closing Instruciton button
                         .padding()
-                    Button(action: goToMap){
+                    Button(action: viewController.goToMap){
                         Text("To Map")
                             .font(.system(size: 30))
                             .multilineTextAlignment(.trailing)
@@ -96,7 +97,7 @@ struct TelescopeView: View {
                         .padding([.leading], 20)
                 HStack { // OPening the Footer
                     Spacer()
-                    Button(action: goToRoles){
+                    Button(action: viewController.goToRoles){
                         Image(systemName: "arrow.left")
                             .font(.system(size: 32))
                         Text("1. Roles")
@@ -104,7 +105,7 @@ struct TelescopeView: View {
                     } // Closing first button
                     .padding([.leading], -100)
                     Spacer()
-                    Button(action: goToHowMapView){
+                    Button(action: viewController.goToHowMapView){
                         Text("3. How to use the Map")
                             .font(.system(size: 32))
                             .multilineTextAlignment(.leading)
@@ -129,13 +130,6 @@ func testVibration() {
     let mqttmanager = MQTTManager()
     mqttmanager.publish(topic: "messagesFromiPad", content: "vibrate")
     print("Finished on my end!")
-}
-
-func goToHowMapView() {
-    if let window = UIApplication.shared.windows.first {
-        window.rootViewController = UIHostingController(rootView: HowToMapView())
-        window.makeKeyAndVisible()
-    }
 }
 
 struct TelescopeView_Previews: PreviewProvider {

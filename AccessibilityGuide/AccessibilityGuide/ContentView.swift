@@ -10,6 +10,7 @@ import CocoaMQTT
 
 
 struct ContentView: View {
+    @State var viewController = ViewController()
     var body: some View {
         VStack {
             HStack{
@@ -29,7 +30,7 @@ struct ContentView: View {
                 }
                 .frame(width: 600, height: 150, alignment: .leading)
                 Spacer()
-                Button(action: goToInstructions){
+                Button(action: viewController.goToInstructions){
                     Text("Instruction Page")
                         .font(.system(size: 30))
                         .multilineTextAlignment(.trailing)
@@ -55,7 +56,7 @@ struct ContentView: View {
                         .font(.system(size: 40))
                         .frame(width: 900, height: 230, alignment: .leading)
                 }
-                Button(action: goToMap) {
+                Button(action: viewController.goToMap) {
                 HStack(alignment: .center){
                     Text("Skip Instructions and Go to Map")
                         .font(.system(size: 40))
@@ -69,7 +70,7 @@ struct ContentView: View {
                 .padding()
                 HStack {
                     Spacer()
-                    Button(action: goToRoles){ Text("1. Roles")
+                    Button(action: viewController.goToRoles){ Text("1. Roles")
                             .font(.system(size: 32))
                         Image(systemName: "arrow.right")
                             .font(.system(size:32))
@@ -86,29 +87,6 @@ struct ContentView: View {
         } // Closing Vstack of everything
     } // CLosing the body
 } // Closing the View
-
-
-func goToRoles() {
-    if let window = UIApplication.shared.windows.first {
-        window.rootViewController = UIHostingController(rootView: RoleView())
-        window.makeKeyAndVisible()
-    }
-}
-
-func goToMap() {
-    print("Got here")
-    let mqttmanager = MQTTManager()
-    mqttmanager.connect()
-    mqttmanager.subscribe(toTopic: "MessagesforiPad")
-    mqttmanager.publish(topic: "MessagesforiPad", content: "connection successful")
-    
-    /// _ mqtt5: CocoaMQTT5, didReceiveAuthReasonCode reasonCode: CocoaMQTTAUTHReasonCode
-    
-    if let window = UIApplication.shared.windows.first {
-        window.rootViewController = UIHostingController(rootView: mapView())
-        window.makeKeyAndVisible()
-    }
-}
 
 
 struct ContentView_Previews: PreviewProvider {

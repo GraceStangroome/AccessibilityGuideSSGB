@@ -13,6 +13,7 @@ import UIKit
 
 
 struct LowerDeckMapView: View {
+    @State var viewController = ViewController()
     var body: some View {
         VStack {
             HStack{
@@ -43,7 +44,7 @@ struct LowerDeckMapView: View {
                 Spacer()
                 VStack{
                     HStack{
-                        Button(action: goToInstructions){  Text("Instruction Page")
+                        Button(action: viewController.goToInstructions){  Text("Instruction Page")
                                 .multilineTextAlignment(.trailing)
                                 .padding([ .bottom], 30)
                                 .font(.system(size: 21))
@@ -71,12 +72,12 @@ struct LowerDeckMapView: View {
                         .font(.system(size: 29))
                     Spacer()
                     Menu("Touch here to see the \nlocation list"){
-                        Button(action: goToMap){Text("The Ship: Dry Dock")}
-                        Button(action: goToMap){Text("The Ship: Top Deck")}
-                        Button(action: goToLowerDeck){Text("The Ship: Lower Deck")}
-                        Button(action: goToMap){Text("The Ship: Middle Deck")}
-                        Button(action: goToMap){Text("Being Brunel: Ground")}
-                        Button(action: goToMap){Text("Being Brunel: First")}
+                        Button(action: viewController.goToMap){Text("The Ship: Dry Dock")}
+                        Button(action: viewController.goToMap){Text("The Ship: Top Deck")}
+                        Button(action: viewController.goToLowerDeck){Text("The Ship: Lower Deck")}
+                        Button(action: viewController.goToMap){Text("The Ship: Middle Deck")}
+                        Button(action: viewController.goToMap){Text("Being Brunel: Ground")}
+                        Button(action: viewController.goToMap){Text("Being Brunel: First")}
                     }
                     .font(.system(size: 20))
                     .foregroundColor(Color.black)
@@ -90,7 +91,7 @@ struct LowerDeckMapView: View {
                     .resizable(capInsets: EdgeInsets(top: 0.0, leading: 0.0, bottom: 0.0, trailing: 0.0))
                     .frame(width: 1000, height: 400)
                 .padding()
-                Button(action: makeAccessibilityReport) {
+                Button(action: viewController.makeAccessibilityReport) {
                     Text("Accessibility needs are different for everyone\nclick HERE to make an accessibility report without a photo")
                         .font(.system(size: 25)).bold()
                         .padding([.bottom], 30)

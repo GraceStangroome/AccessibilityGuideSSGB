@@ -30,12 +30,13 @@ class RFIDManager: UIViewController {
     }
     
     func doThings() -> String {
+        let viewController = ViewController()
         print("Started doing things")
         if messages.count > 0 {
             let message = messages[messages.count]
             if (message.tag == "lowerdeck") {
                 print("Trying to go to lowerdeck")
-                goToLowerDeck()
+                viewController.goToLowerDeck()
             }
             
             else if (message.tag == "lowerdeck1") {
@@ -62,15 +63,7 @@ class RFIDManager: UIViewController {
     }
 
     @IBAction func disconnect() {
-        
-        if mqttVersion == "3.1.1" {
-            mqtt!.disconnect()
-        }else if mqttVersion == "5.0" {
-            mqtt5!.disconnect()
-            //or
-            //mqtt5!.disconnect(reasonCode: CocoaMQTTDISCONNECTReasonCode.disconnectWithWillMessage, userProperties: ["userone":"hi"])
-        }
-        
+        mqtt!.disconnect()
         _ = navigationController?.popViewController(animated: true)
     }
     
@@ -89,18 +82,6 @@ class RFIDManager: UIViewController {
         messages.append(rfidmessage)
     }
 
-    @objc func receivedMqtt5Message(notification: NSNotification) {
-        let userInfo = notification.userInfo as! [String: AnyObject]
-        let message = userInfo["message"] as! String
-        let topic = userInfo["topic"] as! String
-        let id = UInt16(userInfo["id"] as! UInt16)
-        //let sender = userInfo["animal"] as! String
-        let sender = topic.replacingOccurrences(of: "messages", with: "")
-        let content = String(message.filter { !"\0".contains($0) })
-        let chatMessage = RFIDMessage(sender: sender, tag: content, id: id)
-        print("sendersendersender =  \(sender)")
-        messages.append(chatMessage)
-    }
     
     func scrollToBottom() {
         let count = messages.count

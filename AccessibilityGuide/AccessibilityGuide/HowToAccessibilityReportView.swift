@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct HowToAccessibilityReportView: View {
+    @State var viewController = ViewController()
     var body: some View {
         VStack {
             HStack{
@@ -28,7 +29,7 @@ struct HowToAccessibilityReportView: View {
                 .frame(width: 550, height: 0, alignment: .leading)
                 Spacer()
                 VStack{
-                        Button(action: goToInstructions){
+                    Button(action: viewController.goToInstructions){
                             Text("Instruction Page")
                                 .font(.system(size: 30))
                                 .multilineTextAlignment(.trailing)
@@ -40,7 +41,7 @@ struct HowToAccessibilityReportView: View {
                                 .padding([.top], 20)
                         } // Closing Instruciton button
                         .padding()
-                    Button(action: goToMap){
+                    Button(action: viewController.goToMap){
                         Text("To Map")
                             .font(.system(size: 30))
                             .multilineTextAlignment(.trailing)
@@ -76,7 +77,7 @@ struct HowToAccessibilityReportView: View {
                         .padding([.leading], 20)
                 HStack { // OPening the Footer
                     Spacer()
-                    Button(action: goToHowMapView){
+                    Button(action: viewController.goToHowMapView){
                         Image(systemName: "arrow.left")
                             .font(.system(size: 32))
                         Text("3. How to use the Map")
@@ -84,7 +85,7 @@ struct HowToAccessibilityReportView: View {
                     } // Closing first button
                     Spacer()
                         .padding([.leading], -40)
-                    Button(action: goToMap){
+                    Button(action: viewController.goToMap){
                         Text("Go to map")
                             .font(.system(size: 32))
                             .multilineTextAlignment(.leading)

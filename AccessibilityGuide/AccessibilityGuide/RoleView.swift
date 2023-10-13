@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct RoleView: View {
+    @State var viewController = ViewController()
     var body: some View {
         VStack {
             HStack{
@@ -29,7 +30,7 @@ struct RoleView: View {
                 .frame(width: 570, height: 100, alignment: .leading)
                 Spacer()
                 VStack{
-                        Button(action: goToInstructions){
+                    Button(action: viewController.goToInstructions){
                             Text("Instruction Page")
                                 .font(.system(size: 30))
                                 .multilineTextAlignment(.trailing)
@@ -40,7 +41,7 @@ struct RoleView: View {
                                 .padding([.top], 20)
                         } // Closing Instruciton button
                         .padding()
-                    Button(action: goToMap){
+                    Button(action: viewController.goToMap){
                         Text("To Map")
                             .font(.system(size: 30))
                             .multilineTextAlignment(.trailing)
@@ -65,7 +66,7 @@ struct RoleView: View {
                 Spacer()
                 HStack {
                     Spacer()
-                    Button(action: goToInstructions){
+                    Button(action: viewController.goToInstructions){
                         Image(systemName: "arrow.left")
                             .font(.system(size: 32))
                         Text("Instruction Page")
@@ -73,7 +74,7 @@ struct RoleView: View {
                     } // Closing first button
                     .padding([.leading], -290)
                     Spacer()
-                    Button(action: goToTelescope){
+                    Button(action: viewController.goToTelescope){
                         Text("2. How to use the Telescope")
                             .font(.system(size: 32))
                         Image(systemName: "arrow.right")
@@ -91,14 +92,6 @@ struct RoleView: View {
         } // Closing Vstack of everything
     } // CLosing the body
 } // Closing the View
-
-
-func goToTelescope() {
-    if let window = UIApplication.shared.windows.first {
-        window.rootViewController = UIHostingController(rootView: TelescopeView())
-        window.makeKeyAndVisible()
-    }
-}
 
 
 

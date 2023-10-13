@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct HowToMapView: View {
+    @State var viewController = ViewController()
     var body: some View {
         VStack {
             HStack{
@@ -28,7 +29,7 @@ struct HowToMapView: View {
                 .frame(width: 550, height: 0, alignment: .leading)
                 Spacer()
                 VStack{
-                        Button(action: goToInstructions){
+                    Button(action: viewController.goToInstructions){
                             Text("Instruction Page")
                                 .font(.system(size: 30))
                                 .multilineTextAlignment(.trailing)
@@ -40,7 +41,7 @@ struct HowToMapView: View {
                                 .padding([.top], 20)
                         } // Closing Instruciton button
                         .padding()
-                    Button(action: goToMap){
+                    Button(action: viewController.goToMap){
                         Text("To Map")
                             .font(.system(size: 30))
                             .multilineTextAlignment(.trailing)
@@ -82,7 +83,7 @@ struct HowToMapView: View {
                     .padding([.leading], 5)
                 HStack { // OPening the Footer
                     Spacer()
-                    Button(action: goToTelescope){
+                    Button(action: viewController.goToTelescope){
                         Image(systemName: "arrow.left")
                             .font(.system(size: 32))
                         Text("2. How to use the Telescope")
@@ -90,7 +91,7 @@ struct HowToMapView: View {
                     } // Closing first button
                     .padding([.leading], -20)
                     Spacer()
-                    Button(action: goToAccessibilityReport){
+                    Button(action: viewController.goToAccessibilityReport){
                         Text("4. How to make an Accessibility report")
                             .font(.system(size: 32))
                             .multilineTextAlignment(.leading)
@@ -108,13 +109,6 @@ struct HowToMapView: View {
         } // Closing Vstack of everything
     } // CLosing the body
 } // Closing the View
-
-func goToAccessibilityReport() {
-    if let window = UIApplication.shared.windows.first {
-        window.rootViewController = UIHostingController(rootView: HowToAccessibilityReportView())
-        window.makeKeyAndVisible()
-    }
-}
 
 struct HowToMapView_Previews: PreviewProvider {
     static var previews: some View {

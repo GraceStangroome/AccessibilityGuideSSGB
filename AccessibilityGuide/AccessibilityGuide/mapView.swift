@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct mapView: View {
+    @State var viewController = ViewController()
     @State private var isPresentingPopup = false
     var body: some View {
         VStack {
@@ -28,7 +29,7 @@ struct mapView: View {
                 }
                 .frame(width: 550, height: 150, alignment: .leading)
                 Spacer()
-                Button(action: goToInstructions){
+                Button(action: viewController.goToInstructions){
                     Text("Instruction Page")
                         .font(.system(size: 30))
                         .multilineTextAlignment(.trailing)
@@ -49,12 +50,12 @@ struct mapView: View {
                         .font(.system(size: 29))
                     Spacer()
                     Menu("Touch here to see the \nlocation list"){
-                        Button(action: goToMap){Text("The Ship: Dry Dock")}
-                        Button(action: goToMap){Text("The Ship: Top Deck")}
-                        Button(action: goToLowerDeck){Text("The Ship: Lower Deck")}
-                        Button(action: goToMap){Text("The Ship: Middle Deck")}
-                        Button(action: goToMap){Text("Being Brunel: Ground")}
-                        Button(action: goToMap){Text("Being Brunel: First")}
+                        Button(action: viewController.goToMap){Text("The Ship: Dry Dock")}
+                        Button(action: viewController.goToMap){Text("The Ship: Top Deck")}
+                        Button(action: viewController.goToLowerDeck){Text("The Ship: Lower Deck")}
+                        Button(action: viewController.goToMap){Text("The Ship: Middle Deck")}
+                        Button(action: viewController.goToMap){Text("Being Brunel: Ground")}
+                        Button(action: viewController.goToMap){Text("Being Brunel: First")}
                     }
                     .font(.system(size: 20))
                     .foregroundColor(Color.black)
@@ -80,7 +81,7 @@ struct mapView: View {
                     PopUpWindowWrapper(popUpWindow: PopUpWindow(title: "You are now on the Lower Deck", text: "This is the last level of the ship’s interior. The SS Great Britain being launched into Bristol’s Floating Harbour on 19 July 1843. Even Prince Albert came to Bristol to celebrate."))
                         .background(ClearView())
                 }
-                Button(action: makeAccessibilityReport) {
+                Button(action: viewController.makeAccessibilityReport) {
                     Text("Accessibility needs are different for everyone\nclick HERE to make an accessibility report without a photo")
                         .font(.system(size: 25)).bold()
 
@@ -95,28 +96,6 @@ struct mapView: View {
         } // Closing the entire screen
     } // CLosing the body
 } // Closing the View
-
-
-func goToInstructions() {
-    if let window = UIApplication.shared.windows.first {
-        window.rootViewController = UIHostingController(rootView: ContentView())
-        window.makeKeyAndVisible()
-    }
-}
-
-func goToLowerDeck() {
-    if let window = UIApplication.shared.windows.first {
-        window.rootViewController = UIHostingController(rootView: LowerDeckMapView())
-        window.makeKeyAndVisible()
-    }
-}
-
-func makeAccessibilityReport() {
-    if let window = UIApplication.shared.windows.first {
-        window.rootViewController = UIHostingController(rootView: AccessibiltyReportUI())
-        window.makeKeyAndVisible()
-    }
-}
 
 
 struct mapView_Previews: PreviewProvider {

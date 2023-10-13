@@ -3,28 +3,20 @@ PODS:
     - CocoaMQTT/Core (= 2.1.6)
   - CocoaMQTT/Core (2.1.6):
     - MqttCocoaAsyncSocket (~> 1.0.8)
-  - CocoaMQTT/WebSockets (2.1.6):
-    - CocoaMQTT/Core
-    - Starscream (~> 3.1.1)
   - MqttCocoaAsyncSocket (1.0.8)
-  - Starscream (3.1.1)
 
 DEPENDENCIES:
   - CocoaMQTT
-  - CocoaMQTT/WebSockets
-  - Starscream (~> 3.1.1)
 
 SPEC REPOS:
   trunk:
     - CocoaMQTT
     - MqttCocoaAsyncSocket
-    - Starscream
 
 SPEC CHECKSUMS:
   CocoaMQTT: 1f206228b29318eabdacad0c2e4e88575922c27a
   MqttCocoaAsyncSocket: 77d3b74f76228dd5a05d1f9526eab101d415b30c
-  Starscream: 4bb2f9942274833f7b4d296a55504dcfc7edb7b0
 
-PODFILE CHECKSUM: 284c2b95ad94c5371dd7ddb4aaa39abe7dc7ba28
+PODFILE CHECKSUM: 0b3cdc8fb7bb4633bae5b4f1707fbdbcb0073cf1
 
 COCOAPODS: 1.12.1

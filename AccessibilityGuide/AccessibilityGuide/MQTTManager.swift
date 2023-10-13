@@ -19,9 +19,9 @@ class MQTTManager {
     func mqttSettingList() {
         print("Configuring")
         configureMQTT()
-        mqttWebsocketsSetting()
         setupOccured = true
     }
+    
     
     func configureMQTT() {
         print("Setting up MQTT")
@@ -41,18 +41,7 @@ class MQTTManager {
         let delegator = MQTTManagerDelegate()
         mqtt.delegate = delegator
     }
-    
-    func mqttWebsocketsSetting() {
-        let clientID = "iPad"
-        let websocket = CocoaMQTTWebSocket(uri: "/mqtt")
-        let mqtt = CocoaMQTT(clientID: clientID, host: "raspberrypi.local", port: 8083, socket: websocket)
-        mqtt.username = "iPad"
-        mqtt.password = "Apple!"
-        mqtt.willMessage = CocoaMQTTMessage(topic: "/will", string: "dieout")
-        mqtt.keepAlive = 60
-        let delegator = MQTTManagerDelegate()
-        mqtt.delegate = delegator
-    }
+
     
     func connect() {
         print("connecting...")
@@ -118,7 +107,7 @@ class MQTTManagerDelegate: CocoaMQTTDelegate {
 
     func mqtt(_ mqtt: CocoaMQTT, didPublishMessage message: CocoaMQTTMessage, id: UInt16) {
         print("PUBLISHED")
-        if let messageText = message.string {
+        if message.string != nil {
             TRACE("message: \(message.string!.description), id: \(id)") // we can force it because the if statement safely checks for it
         } else {
             TRACE("empty message, id: \(id)")
@@ -131,8 +120,9 @@ class MQTTManagerDelegate: CocoaMQTTDelegate {
     }
 
     func mqtt(_ mqtt: CocoaMQTT, didReceiveMessage message: CocoaMQTTMessage, id: UInt16 ) {
+        var viewController = ViewController()
         print("Recieved a Message")
-        if let messageText = message.string {
+        if message.string != nil {
             TRACE("message: \(message.string!.description), id: \(id)") // we can force it because the if statement safely checks for it
         } else {
             TRACE("Recieved a message with no text, id: \(id)")
@@ -144,7 +134,7 @@ class MQTTManagerDelegate: CocoaMQTTDelegate {
             print("Message recieved in topic \(message.topic) with payload \(message.string!)")
             if (message.string == "lowerdeck") {
                 print("Trying to go to lowerdeck")
-                goToLowerDeck()
+                viewController.goToLowerDeck()
             } else if (message.string == "lowerdeck1") {
                 print("Trying the pop up")
                 var popUpWindow: PopUpWindow!
@@ -171,7 +161,7 @@ class MQTTManagerDelegate: CocoaMQTTDelegate {
     }
 
     func mqttDidDisconnect(_ mqtt: CocoaMQTT, withError err: Error?) {
-        if let error = err {
+        if err != nil {
             TRACE("\(String(describing: err))")
             print("Disconnected with error \(String(describing: err))")
             let maxReconnectAttempts = 10

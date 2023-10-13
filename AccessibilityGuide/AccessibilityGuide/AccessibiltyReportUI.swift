@@ -18,6 +18,7 @@ struct AccessibilityReport {
 }
 
 struct AccessibiltyReportUI: View {
+    @State var viewController = ViewController()
     @State private var thisReport = AccessibilityReport()
     @State private var selectedIcon: String = "Choose an icon"
     @State private var selectedIconIcon: String = " "
@@ -43,7 +44,7 @@ struct AccessibiltyReportUI: View {
                 }
                 .frame(width: 590, height: 0)
                 Spacer()
-                Button(action: goToInstructions){
+                Button(action: viewController.goToInstructions){
                     Text("Instruction Page")
                         .font(.system(size: 30))
                         .multilineTextAlignment(.trailing)
@@ -184,7 +185,7 @@ struct AccessibiltyReportUI: View {
                     }
                     Spacer()
                 }
-                Button(action: goToMap) {Text("Touch HERE to go back to map without submitting").bold()
+                Button(action: viewController.goToMap) {Text("Touch HERE to go back to map without submitting").bold()
                         .font(.system(size: 40))
                         .multilineTextAlignment(.trailing)
                         .frame(minWidth: 0, maxWidth: .infinity)
