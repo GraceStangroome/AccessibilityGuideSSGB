@@ -127,7 +127,7 @@ struct TelescopeView: View {
 
 func testVibration() {
     print("Beep Boop testing vibration!")
-    let mqttmanager = MQTTManager()
+    let mqttmanager = ViewController()
     mqttmanager.publish(topic: "messagesFromiPad", content: "vibrate")
     print("Finished on my end!")
 }
