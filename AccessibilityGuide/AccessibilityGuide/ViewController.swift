@@ -10,8 +10,8 @@ import SwiftUI
 import CocoaMQTT
 
 class ViewController: UIViewController {
+    
     let mqttClient = CocoaMQTT(clientID: "iPad", host: "raspberrypi.local", port: 1883)
-    var popUpStates: PopUpStates!
     @State private var hasSetup = false
     
     func setup() {
@@ -22,8 +22,8 @@ class ViewController: UIViewController {
         mqttClient.keepAlive = 60
         mqttClient.delegate = self
         _ = mqttClient.connect()
-        popUpStates = PopUpStates()
         hasSetup = true
+        print("finished setting up")
     }
     
     func publish(topic: String, content: String) {
@@ -103,6 +103,21 @@ class ViewController: UIViewController {
             window.makeKeyAndVisible()
         }
     }
+    
+    // this next bit handles the automatic popping up when mqtt stuff occurs
+    struct popUpViewController: View {
+        var body: some View {
+            NavigationView {
+                if PopUpStates.showLowerDeckPop {
+                    PopUpWindowWrapper(popUpWindow: PopUpWindow(title: "You are now on the Lower Deck", text: "This is the last level of the ship’s interior. The SS Great Britain being launched into Bristol’s Floating Harbour on 19 July 1843. Even Prince Albert came to Bristol to celebrate."))
+                }
+                if PopUpStates.showDiningSaloonPop {
+                    PopUpWindowWrapper(popUpWindow: PopUpWindow(title: "First Class Dining Saloon", text: "There were four mealtimes for the first-class passengers: breakfast at 9am; lunch at 12pm; supper at 4pm; and dinner at 7:30pm. Would you like to join Annie Henning and Isambard Kingdom Brunel for a meal?"))
+                }
+            }
+        }
+    }
+
 }
 
 
@@ -150,13 +165,16 @@ extension ViewController: CocoaMQTTDelegate {
             print("Message recieved in topic \(message.topic) with payload \(msgString)")
             if (msgString == "lowerdeck") {
                 print("Trying to go to lowerdeck")
+                PopUpStates.showLowerDeckPop = true
+                print (PopUpStates.showLowerDeckPop)
                 goToLowerDeck()
-                popUpStates.showLowerDeckPop = true
             } else if (msgString == "lowerdeck1") {
                 print("Trying the pop up")
-                popUpStates.showDiningSaloonPop = true
+                PopUpStates.showDiningSaloonPop = true
+                print (PopUpStates.showDiningSaloonPop)
             }
         }
+        popUpViewController
     }
     
     func mqtt(_ mqtt: CocoaMQTT, didSubscribeTopics success: NSDictionary, failed: [String]) {
