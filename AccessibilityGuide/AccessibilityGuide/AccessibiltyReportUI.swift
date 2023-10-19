@@ -302,8 +302,54 @@ struct AccessibiltyReportUI: View {
 } // Closing the View
 
 
-/* This doesn't work because Accessibility Report UI isn't a class and I don't want it to be,
-extension AccessibiltyReportUI: MFMailComposeViewControllerDelegate {
+// This doesn't work because Accessibility Report UI isn't a class and I don't want it to be,
+class Mailer: MFMailComposeViewControllerDelegate {
+    func isEqual(_ object: Any?) -> Bool {
+        <#code#>
+    }
+    
+    var hash: Int
+    
+    var superclass: AnyClass?
+    
+    func `self`() -> Self {
+        <#code#>
+    }
+    
+    func perform(_ aSelector: Selector!) -> Unmanaged<AnyObject>! {
+        <#code#>
+    }
+    
+    func perform(_ aSelector: Selector!, with object: Any!) -> Unmanaged<AnyObject>! {
+        <#code#>
+    }
+    
+    func perform(_ aSelector: Selector!, with object1: Any!, with object2: Any!) -> Unmanaged<AnyObject>! {
+        <#code#>
+    }
+    
+    func isProxy() -> Bool {
+        <#code#>
+    }
+    
+    func isKind(of aClass: AnyClass) -> Bool {
+        <#code#>
+    }
+    
+    func isMember(of aClass: AnyClass) -> Bool {
+        <#code#>
+    }
+    
+    func conforms(to aProtocol: Protocol) -> Bool {
+        <#code#>
+    }
+    
+    func responds(to aSelector: Selector!) -> Bool {
+        <#code#>
+    }
+    
+    var description: String
+    
     func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
         if let _ = error {
             controller.dismiss(animated: true, completion: nil)
@@ -324,7 +370,7 @@ extension AccessibiltyReportUI: MFMailComposeViewControllerDelegate {
         controller.dismiss(animated: true, completion: nil)
     }
 }
- */
+
 
 #Preview {
     AccessibiltyReportUI()

@@ -8,11 +8,6 @@
 
 import SwiftUI
 
-// contains all the popups that exist
-struct PopUpStates {
-    static var showLowerDeckPop = false
-    static var showDiningSaloonPop = false
-}
 
 // the wrapper itself
 struct PopUpWindowWrapper: UIViewControllerRepresentable {

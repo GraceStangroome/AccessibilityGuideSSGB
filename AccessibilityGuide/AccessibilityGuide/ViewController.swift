@@ -13,6 +13,7 @@ class ViewController: UIViewController {
     
     let mqttClient = CocoaMQTT(clientID: "iPad", host: "raspberrypi.local", port: 1883)
     @State private var hasSetup = false
+    @State private var onLowerFloor = false
     
     func setup() {
         mqttClient.logLevel = .debug
@@ -24,6 +25,12 @@ class ViewController: UIViewController {
         _ = mqttClient.connect()
         hasSetup = true
         print("finished setting up")
+    }
+    
+    
+    func notifyPopUp(whichPopUp: String) {
+        NotificationCenter.default.post(name: Notification.Name(whichPopUp), object: nil)
+        print ("notified that lower deck pop up should show: \(whichPopUp)")
     }
     
     func publish(topic: String, content: String) {
@@ -60,6 +67,7 @@ class ViewController: UIViewController {
             window.rootViewController = UIHostingController(rootView: LowerDeckMapView())
             window.makeKeyAndVisible()
         }
+        onLowerFloor = true
     }
 
     func makeAccessibilityReport() {
@@ -101,20 +109,6 @@ class ViewController: UIViewController {
         if let window = UIApplication.shared.windows.first {
             window.rootViewController = UIHostingController(rootView: mapView())
             window.makeKeyAndVisible()
-        }
-    }
-    
-    // this next bit handles the automatic popping up when mqtt stuff occurs
-    struct popUpViewController: View {
-        var body: some View {
-            NavigationView {
-                if PopUpStates.showLowerDeckPop {
-                    PopUpWindowWrapper(popUpWindow: PopUpWindow(title: "You are now on the Lower Deck", text: "This is the last level of the ship’s interior. The SS Great Britain being launched into Bristol’s Floating Harbour on 19 July 1843. Even Prince Albert came to Bristol to celebrate."))
-                }
-                if PopUpStates.showDiningSaloonPop {
-                    PopUpWindowWrapper(popUpWindow: PopUpWindow(title: "First Class Dining Saloon", text: "There were four mealtimes for the first-class passengers: breakfast at 9am; lunch at 12pm; supper at 4pm; and dinner at 7:30pm. Would you like to join Annie Henning and Isambard Kingdom Brunel for a meal?"))
-                }
-            }
         }
     }
 
@@ -164,17 +158,16 @@ extension ViewController: CocoaMQTTDelegate {
         if let msgString = message.string {
             print("Message recieved in topic \(message.topic) with payload \(msgString)")
             if (msgString == "lowerdeck") {
-                print("Trying to go to lowerdeck")
-                PopUpStates.showLowerDeckPop = true
-                print (PopUpStates.showLowerDeckPop)
-                goToLowerDeck()
+                if !onLowerFloor {
+                    print("Trying to go to lowerdeck")
+                    goToLowerDeck()
+                }
+                notifyPopUp(whichPopUp: "showLowerDeckPop")
             } else if (msgString == "lowerdeck1") {
                 print("Trying the pop up")
-                PopUpStates.showDiningSaloonPop = true
-                print (PopUpStates.showDiningSaloonPop)
+                notifyPopUp(whichPopUp: "showDiningSaloonPop")
             }
         }
-        popUpViewController
     }
     
     func mqtt(_ mqtt: CocoaMQTT, didSubscribeTopics success: NSDictionary, failed: [String]) {

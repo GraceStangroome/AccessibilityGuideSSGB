@@ -9,7 +9,7 @@ import SwiftUI
 
 struct mapView: View {
     @State var viewController = ViewController()
-    @State private var isPresentingPopup = false
+    @State private var doNothing = false
     var body: some View {
         VStack {
             HStack{
@@ -65,7 +65,7 @@ struct mapView: View {
                 }
                 .padding([.leading], 200)
                 .frame(minWidth: 0, maxWidth: .infinity)
-                Button(action: { self.isPresentingPopup.toggle()
+                Button(action: { doNothing = true
                 }) {
                     Text(" ")
                         .padding([.top, .bottom], 200)
@@ -76,10 +76,6 @@ struct mapView: View {
                                        .background(Color.white)
                                )
                                .foregroundColor(Color.black)
-                }
-                .sheet(isPresented: $isPresentingPopup) {
-                    PopUpWindowWrapper(popUpWindow: PopUpWindow(title: "You are now on the Lower Deck", text: "This is the last level of the ship’s interior. The SS Great Britain being launched into Bristol’s Floating Harbour on 19 July 1843. Even Prince Albert came to Bristol to celebrate."))
-                        .background(ClearView())
                 }
                 Button(action: viewController.makeAccessibilityReport) {
                     Text("Accessibility needs are different for everyone\nclick HERE to make an accessibility report without a photo")
