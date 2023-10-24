@@ -10,6 +10,8 @@ import SwiftUI
 struct mapView: View {
     @State var viewController = ViewController()
     @State private var doNothing = false
+    @State private var showErrorPop = false
+    @State private var errInfo = ""
     var body: some View {
         VStack {
             HStack{
@@ -76,6 +78,37 @@ struct mapView: View {
                                        .background(Color.white)
                                )
                                .foregroundColor(Color.black)
+                }
+                .onReceive(NotificationCenter.default.publisher(for: Notification.Name("unacceptableProtocolVersion"))) { _ in
+                    errInfo = "an unnacctable protocol version"
+                    showErrorPop = true
+                }
+                .onReceive(NotificationCenter.default.publisher(for: Notification.Name("identifierRejected"))) { _ in
+                    errInfo = "identifier being rejected" 
+                    showErrorPop = true
+                }
+                .onReceive(NotificationCenter.default.publisher(for: Notification.Name("serverUnavailable"))) { _ in
+                    errInfo = "the server being unavailable" 
+                    showErrorPop = true
+                }
+                .onReceive(NotificationCenter.default.publisher(for: Notification.Name("badlogOn"))) { _ in
+                    errInfo = "a bad password or username" 
+                    showErrorPop = true
+                }
+                .onReceive(NotificationCenter.default.publisher(for: Notification.Name("notAuthorized"))) { _ in
+                    errInfo = "the connection not being authorised" 
+                    showErrorPop = true
+                }
+                .onReceive(NotificationCenter.default.publisher(for: Notification.Name("reserved"))) { _ in
+                    errInfo = "the connection being reserved" 
+                    showErrorPop = true
+                }
+                .onReceive(NotificationCenter.default.publisher(for: Notification.Name("errOccured"))) { _ in
+                    errInfo = "an error occuring. This is likely due to the broker being offline" // this is true from testing
+                    showErrorPop = true
+                }
+                .sheet(isPresented: $showErrorPop) {
+                    PopUpWindowWrapper(popUpWindow: PopUpWindow(title: "Error", text: "A problem connecting to the broker occured due to \(errInfo). Please close the app compleatly and try again. If this persists please contact a member of staff."))
                 }
                 Button(action: viewController.makeAccessibilityReport) {
                     Text("Accessibility needs are different for everyone\nclick HERE to make an accessibility report without a photo")

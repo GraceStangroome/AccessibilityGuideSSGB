@@ -23,6 +23,8 @@ struct AccessibiltyReportUI: View {
     @State private var selectedIcon: String = "Choose an icon"
     @State private var selectedIconIcon: String = " "
     @State private var selectedLocation: String = "Choose an Location"
+    @State private var isShowingMailView = false
+    @State private var emailPop = false
     var audioPlayer: AVAudioPlayer!
     var audioRecorder: AVAudioRecorder!
     var body: some View {
@@ -129,13 +131,21 @@ struct AccessibiltyReportUI: View {
                 Spacer()
                 Text(" ").frame(width: 2000, height: 10, alignment: .leading)
                     .background(Color.red)
+                    .sheet(isPresented: $emailPop) {
+                        PopUpWindowWrapper(popUpWindow: PopUpWindow(title: "Information Sent", text: "Your accessibility report has been successfully submitted"))
+                    }
+                    .onReceive(NotificationCenter.default.publisher(for: Notification.Name("EmailSent"))) { _ in
+                        emailPop = true
+                    }
                 Spacer()
-                Text("Click your preferred method to describe the need you noticed:")
+                //Text("Click your preferred method to describe the need you noticed:")
+                Text("Please now explain the accessibility problem to the researcher")
                     .font(.system(size: 27))
                     .frame(maxWidth: .infinity, alignment: .center)
                     .padding([.leading], 20)
                     .padding([.bottom], -10)
                 Spacer()
+                /*
                 HStack {
                     Spacer()
                     Button(action: typed) {
@@ -150,7 +160,7 @@ struct AccessibiltyReportUI: View {
                             .foregroundColor(Color.black)
                     }
                     Spacer()
-                    Button(action: voice) {
+                    //Button(action: voice) {
                         Text("Leave a voice memo").font(.system(size: 27))
                             .foregroundColor(Color.black)
                             .frame(width: 350, height: 75)
@@ -163,6 +173,7 @@ struct AccessibiltyReportUI: View {
                     }
                     Spacer()
                 }
+                */
                 Spacer()
                 Text(" ").frame(width: 2000, height: 10, alignment: .leading)
                     .background(Color.red)
@@ -172,7 +183,9 @@ struct AccessibiltyReportUI: View {
                     Text("Clicking “Submit” will anonymously send this information to an \n encrypted mailbox for staff to review before it is added to our guide").font(.system(size: 25))
                         .multilineTextAlignment(.center)
                     Spacer()
-                    Button(action: submitAR) {
+                    Button(action: {
+                        NotificationCenter.default.post(name: Notification.Name("EmailSent"), object: nil)}) {
+                            // if it was working, the button action would be self.isShowingMailView.toggle()
                         Text("Submit").bold()
                             .font(.system(size: 40)).foregroundColor(Color.black)
                             .frame(width: 200, height: 75)
@@ -182,6 +195,9 @@ struct AccessibiltyReportUI: View {
                                     .background(Color.white)
                             )
                             .foregroundColor(Color.black)
+                    }
+                    .sheet(isPresented: $isShowingMailView) {
+                        MailComposeView(isShowing: self.$isShowingMailView)
                     }
                     Spacer()
                 }
@@ -283,91 +299,47 @@ struct AccessibiltyReportUI: View {
             audioRecorder.stop()
         }
     }
-
-    // pressing Submit will send an email to an email address
-    func submitAR() {
-        guard MFMailComposeViewController.canSendMail() else {
-            return
-        }
-        print("Sending email")
-        /*
-        let composer = MFMailComposeViewController()
-        composer.mailComposeDelegate = self
-        composer.setToRecipients(["ssgb@gmail.com"])
-        composer.setSubject("Accessibility Report")
-        composer.setMessageBody("Location: \(thisReport.location) \n Icon: \(thisReport.icon) Further information: \n \(thisReport.textdescription)\n \(thisReport.voicememo)", isHTML: false)
-        present(composer, animated: true)
-         */
-    }
 } // Closing the View
 
+// pressing Submit will send an email to an email address
+func submitAR() {
+    // if voice memo
+    // let data = voice memo
+    // if written
+    // let data = written
 
-// This doesn't work because Accessibility Report UI isn't a class and I don't want it to be,
-class Mailer: MFMailComposeViewControllerDelegate {
-    func isEqual(_ object: Any?) -> Bool {
-        <#code#>
+    if MFMailComposeViewController.canSendMail() {
+        let emailController = mailConfigurer()
+    } else {
+        print("The Mail Compose View Controller could not send mail")
     }
-    
-    var hash: Int
-    
-    var superclass: AnyClass?
-    
-    func `self`() -> Self {
-        <#code#>
+
+    func mailConfigurer() -> MFMailComposeViewController {
+            print("Sending email")
+            let composer = MFMailComposeViewController()
+//            composer.mailComposeDelegate = Mailer()
+//            composer.setToRecipients(["yw20971@bristol.ac.uk"])
+//            composer.setSubject("Accessibility Report")
+//            composer.setMessageBody("Location: \(AccessibilityReport.location) \n Icon: \(thisReport.icon) Further information: \n \(thisReport.textdescription)\n \(thisReport.voicememo)", isHTML: false)
+            // if statement asking if it's text or voice
+            //composer.addAttachmentData(data!, mimeType: String, fileName: <#T##String#>)
+            return composer
     }
+}
+
+struct MailComposeView: View {
+    @Binding var isShowing: Bool
     
-    func perform(_ aSelector: Selector!) -> Unmanaged<AnyObject>! {
-        <#code#>
-    }
-    
-    func perform(_ aSelector: Selector!, with object: Any!) -> Unmanaged<AnyObject>! {
-        <#code#>
-    }
-    
-    func perform(_ aSelector: Selector!, with object1: Any!, with object2: Any!) -> Unmanaged<AnyObject>! {
-        <#code#>
-    }
-    
-    func isProxy() -> Bool {
-        <#code#>
-    }
-    
-    func isKind(of aClass: AnyClass) -> Bool {
-        <#code#>
-    }
-    
-    func isMember(of aClass: AnyClass) -> Bool {
-        <#code#>
-    }
-    
-    func conforms(to aProtocol: Protocol) -> Bool {
-        <#code#>
-    }
-    
-    func responds(to aSelector: Selector!) -> Bool {
-        <#code#>
-    }
-    
-    var description: String
-    
-    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
-        if let _ = error {
-            controller.dismiss(animated: true, completion: nil)
-            return
+    var body: some View {
+        VStack {
+            Text("Compose and send email here")
+            Button(action: {
+                submitAR()
+                self.isShowing = false // makes it dissappear
+            }) {
+                Text("Send Email")
+            }
         }
-        switch result {
-        case .cancelled:
-            break
-        case .failed:
-            break
-        case .saved:
-            break
-        case .sent:
-            break
-        @unknown default:
-            <#fatalError()#>
-        }
-        controller.dismiss(animated: true, completion: nil)
     }
 }
 

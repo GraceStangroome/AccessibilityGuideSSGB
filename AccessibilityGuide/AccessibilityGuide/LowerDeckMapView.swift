@@ -16,6 +16,7 @@ struct LowerDeckMapView: View {
     @State var viewController = ViewController()
     @State private var showLowerDeckPop = true // this means that this displays automatically when the page loads
     @State private var showDiningSaloonPop = false
+    @State private var isPressed = false
     var body: some View {
         VStack {
             HStack{
@@ -89,25 +90,58 @@ struct LowerDeckMapView: View {
                 }
                 .padding([.leading], 200)
                 .frame(minWidth: 0, maxWidth: .infinity)
-                Image("lower deck")
-                    .resizable(capInsets: EdgeInsets(top: 0.0, leading: 0.0, bottom: 0.0, trailing: 0.0))
-                    .frame(width: 1000, height: 400)
-                .padding()
-                // Pop Up Code
-                .sheet(isPresented: $showLowerDeckPop) {
-                    PopUpWindowWrapper(popUpWindow: PopUpWindow(title: "You are now on the Lower Deck", text: "This is the last level of the ship’s interior. The SS Great Britain being launched into Bristol’s Floating Harbour on 19 July 1843. Even Prince Albert came to Bristol to celebrate."))
-                }
-                .onReceive(NotificationCenter.default.publisher(for: Notification.Name("showLowerDeckPop"))) { _ in
-                    showLowerDeckPop = true
-                }
-                .sheet(isPresented: $showDiningSaloonPop) {
-                    PopUpWindowWrapper(popUpWindow: PopUpWindow(title: "First Class Dining Saloon", text: "There were four mealtimes for the first-class passengers: breakfast at 9am; lunch at 12pm; supper at 4pm; and dinner at 7:30pm. Would you like to join Annie Henning and Isambard Kingdom Brunel for a meal?"))
-                }
-                .onReceive(NotificationCenter.default.publisher(for: Notification.Name("showDiningSaloonPop"))) { _ in
-                    showDiningSaloonPop = true
-                }
-                // end of pop up code
-                
+                ZStack {
+                    Image("lowerdeck")
+                        .resizable(capInsets: EdgeInsets(top: 0.0, leading: 0.0, bottom: 0.0, trailing: 0.0))
+                        .frame(width: 1000, height: 400)
+                        .padding()
+                    // Pop Up Code
+                        .sheet(isPresented: $showLowerDeckPop) {
+                            PopUpWindowWrapper(popUpWindow: PopUpWindow(title: "You are now on the Lower Deck", text: "This is the last level of the ship’s interior. The SS Great Britain being launched into Bristol’s Floating Harbour on 19 July 1843. Even Prince Albert came to Bristol to celebrate."))
+                        }
+                        .onReceive(NotificationCenter.default.publisher(for: Notification.Name("showLowerDeckPop"))) { _ in
+                            showLowerDeckPop = true
+                        }
+                        .sheet(isPresented: $showDiningSaloonPop) {
+                            PopUpWindowWrapper(popUpWindow: PopUpWindow(title: "First Class Dining Saloon", text: "There were four mealtimes for the first-class passengers: breakfast at 9am; lunch at 12pm; supper at 4pm; and dinner at 7:30pm. Would you like to join Annie Henning and Isambard Kingdom Brunel for a meal?"))
+                        }
+                        .onReceive(NotificationCenter.default.publisher(for: Notification.Name("showDiningSaloonPop"))) { _ in
+                            showDiningSaloonPop = true
+                        }
+                    // end of pop up code
+                    // map labels
+                    VStack {
+                        Text("Stepped Exit")
+                        Image(systemName: "arrow.up")
+                            .bold()
+                            .font(.system(size:32))
+                    }
+                    .position(x: 370, y: 120)
+                    VStack {
+                        Image(systemName: "arrow.down")
+                            .bold()
+                            .font(.system(size:32))
+                        Text("Accessible Exit")
+                    }
+                    .position(x: 370, y: 340)
+                    // Overlaying buttons
+                    overlayingButton(imageName: "number.square", buttonText: "Grilled Flooring")
+                        .position(x: 250, y: 190)
+                    overlayingButton(imageName: "stairs", buttonText: "Stairs to other decks")
+                        .position(x: 450, y: 160)
+                    overlayingButton(imageName: "stairs", buttonText: "Stairs to \n other decks")
+                        .position(x: 660, y: 200)
+                    overlayingButton(imageName: "stairs", buttonText: "Stairs to \n other decks")
+                        .position(x: 660, y: 270)
+                    overlayingButton(imageName: "chair.lounge.fill", buttonText: "Seating")
+                        .position(x: 730, y: 260)
+                    overlayingButton(imageName: "chair.lounge.fill", buttonText: "Seating")
+                        .position(x: 805, y: 260)
+                    overlayingButton(imageName: "chair.lounge.fill", buttonText: "Seating")
+                        .position(x: 730, y: 210)
+                    overlayingButton(imageName: "chair.lounge.fill", buttonText: "Seating")
+                        .position(x: 805, y: 210)
+                } // end of ZStack
                 Button(action: viewController.makeAccessibilityReport) {
                     Text("Accessibility needs are different for everyone\nclick HERE to make an accessibility report without a photo")
                         .font(.system(size: 25)).bold()

@@ -17,8 +17,8 @@ class ViewController: UIViewController {
     
     func setup() {
         mqttClient.logLevel = .debug
-        mqttClient.username = "iPad"
-        mqttClient.password = "Apple!"
+        mqttClient.username = "iPad1"
+        mqttClient.password = "Apple"
         mqttClient.willMessage = CocoaMQTTMessage(topic: "/will", string: "dieout")
         mqttClient.keepAlive = 60
         mqttClient.delegate = self
@@ -98,6 +98,7 @@ class ViewController: UIViewController {
         }
     }
     
+    
     @IBAction func goToMap() {
         print("Got here")
         if hasSetup {
@@ -127,21 +128,22 @@ extension ViewController: CocoaMQTTDelegate {
             mqtt.publish(message)
         case .unacceptableProtocolVersion:
             print("Connection refused: Unacceptable protocol version")
-            // Handle the error appropriately.
+            notifyPopUp(whichPopUp: "unacceptableProtocolVersion")
         case .identifierRejected:
             print("Connection refused: Identifier rejected")
-            // Handle the error appropriately.
+            notifyPopUp(whichPopUp: "identifierRejected")
         case .serverUnavailable:
             print("Connection refused: Server unavailable")
-            // Handle the error appropriately.
+            notifyPopUp(whichPopUp: "serverUnavailable")
         case .badUsernameOrPassword:
             print("Connection refused: Bad username or password")
-            // Handle the error appropriately.
+            notifyPopUp(whichPopUp: "badlogOn")
         case .notAuthorized:
             print("Connection refused: Not authorized")
-            // Handle the error appropriately.
+            notifyPopUp(whichPopUp: "notAuthorized")
         case .reserved: // unusure what this case means but it was missing
             print("Connection refused: Reserved")
+            notifyPopUp(whichPopUp: "reserved")
         }
     }
     
@@ -188,6 +190,7 @@ extension ViewController: CocoaMQTTDelegate {
     
     func mqttDidDisconnect(_ mqtt: CocoaMQTT, withError err: Error?) {
         print("error occured: \(String(describing: err))")
+        notifyPopUp(whichPopUp: "errOccured")
     }
     
 }

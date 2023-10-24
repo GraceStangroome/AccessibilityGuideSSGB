@@ -21,6 +21,7 @@
 		C996FB862AC6FBD400B5EA77 /* HowToAccessibilityReportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C996FB852AC6FBD400B5EA77 /* HowToAccessibilityReportView.swift */; };
 		C996FB882AC7035500B5EA77 /* AccessibiltyReportUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = C996FB872AC7035500B5EA77 /* AccessibiltyReportUI.swift */; };
 		C9BB289D2AB8A5830030E5EC /* PopUpWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9BB289C2AB8A5830030E5EC /* PopUpWindow.swift */; };
+		C9C047F92AE29A5C00574D6F /* OverlayingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9C047F82AE29A5C00574D6F /* OverlayingButton.swift */; };
 		C9D062E02AB1C9A0007190A7 /* RoleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9D062DF2AB1C9A0007190A7 /* RoleView.swift */; };
 		C9D062E22AB1D069007190A7 /* TelescopeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9D062E12AB1D069007190A7 /* TelescopeView.swift */; };
 		C9D30D322AD7044C00AFE90E /* PopUpWindowWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9D30D312AD7044C00AFE90E /* PopUpWindowWrapper.swift */; };
@@ -79,6 +80,7 @@
 		C996FB852AC6FBD400B5EA77 /* HowToAccessibilityReportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HowToAccessibilityReportView.swift; sourceTree = "<group>"; };
 		C996FB872AC7035500B5EA77 /* AccessibiltyReportUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessibiltyReportUI.swift; sourceTree = "<group>"; };
 		C9BB289C2AB8A5830030E5EC /* PopUpWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpWindow.swift; sourceTree = "<group>"; };
+		C9C047F82AE29A5C00574D6F /* OverlayingButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverlayingButton.swift; sourceTree = "<group>"; };
 		C9D062DF2AB1C9A0007190A7 /* RoleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoleView.swift; sourceTree = "<group>"; };
 		C9D062E12AB1D069007190A7 /* TelescopeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TelescopeView.swift; sourceTree = "<group>"; };
 		C9D30D312AD7044C00AFE90E /* PopUpWindowWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpWindowWrapper.swift; sourceTree = "<group>"; };
@@ -163,6 +165,7 @@
 				C9D30D312AD7044C00AFE90E /* PopUpWindowWrapper.swift */,
 				C9D7F4902ABC7D15006F9F28 /* RFIDMessage.swift */,
 				C9D30D352AD9544500AFE90E /* ViewController.swift */,
+				C9C047F82AE29A5C00574D6F /* OverlayingButton.swift */,
 			);
 			path = AccessibilityGuide;
 			sourceTree = "<group>";
@@ -385,6 +388,7 @@
 				C9D30D322AD7044C00AFE90E /* PopUpWindowWrapper.swift in Sources */,
 				C9D7F4912ABC7D15006F9F28 /* RFIDMessage.swift in Sources */,
 				C996FB842AC6F8F900B5EA77 /* HowToMapView.swift in Sources */,
+				C9C047F92AE29A5C00574D6F /* OverlayingButton.swift in Sources */,
 				C9D062E02AB1C9A0007190A7 /* RoleView.swift in Sources */,
 				C996FB862AC6FBD400B5EA77 /* HowToAccessibilityReportView.swift in Sources */,
 				C9093A982AA882D200E00131 /* LowerDeckMapView.swift in Sources */,
@@ -429,6 +433,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -489,6 +494,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -542,7 +548,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 744825DBD51897C8D7CB492A /* Pods-AccessibilityGuide.debug.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = AccessibilityGuide/AccessibilityGuide.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
@@ -589,7 +594,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 881DABD7116598E768B0C31B /* Pods-AccessibilityGuide.release.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = AccessibilityGuide/AccessibilityGuide.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
