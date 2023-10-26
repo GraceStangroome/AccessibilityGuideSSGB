@@ -22,12 +22,11 @@ struct RoleView: View {
                         .font(.system(size: 40))
                         .bold()
                         .padding([.leading], 25)
-                    Text("Choosing Roles")
+                    Text("Instructions")
                         .font(.system(size: 30))
-                        .multilineTextAlignment(.leading)
-                        .padding([.leading], -90)
+                        .padding(.leading, -245)
                 }
-                .frame(width: 570, height: 100, alignment: .leading)
+                .multilineTextAlignment(.leading)
                 Spacer()
                 VStack{
                     Button(action: viewController.goToInstructions){
@@ -60,9 +59,59 @@ struct RoleView: View {
             
             VStack { // Opening the rest of the page
                 Spacer()
-                Image("Step1Roles")
-                    .resizable(capInsets: EdgeInsets(top: 0.0, leading: 0.0, bottom: 0.0, trailing: 0.0))
-                    .frame(width: 1000, height: 500)
+                Text("Step 1: Choose a role:").font(.system(size: 37)).frame(maxWidth: .infinity, alignment: .leading)
+                    .padding([.leading], 20)
+                Spacer()
+                Text(" ").frame(width: 2000, height: 10, alignment: .leading)
+                    .background(Color.red)
+                HStack { // first row of instructions
+                    Spacer()
+                    VStack {
+                        Text("Captain").font(.system(size: 30))
+                        Image("characters-07").resizable().aspectRatio(contentMode: .fit)
+                    }
+                    Spacer()
+                    VStack {
+                        Image("characters-01").resizable().aspectRatio(contentMode: .fit)
+                        Text("Holds the Tablet").font(.system(size: 20))
+                    }
+                    Spacer()
+                    VStack {
+                        Image("characters-06").resizable().aspectRatio(contentMode: .fit)
+                        Text("The map will change as you explore \nand tell you about sensory triggers \nand potential safety hazards").multilineTextAlignment(.center).font(.system(size: 20))
+                    }
+                    Spacer()
+                    VStack {
+                        Image("characters-05").resizable().aspectRatio(contentMode: .fit)
+                        Text("If you notice something that \nbothers the Navigator, you can \nmake an accessibility report").multilineTextAlignment(.center).font(.system(size: 20))
+                    }
+                    Spacer()
+                } // end of first row
+                Text(" ").frame(width: 2000, height: 10, alignment: .leading)
+                    .background(Color.red)
+                HStack { // start of second row
+                    Spacer()
+                    VStack {
+                        Text("Navigator").font(.system(size: 30))
+                        Image("characters-08").resizable().aspectRatio(contentMode: .fit)
+                    }
+                    Spacer()
+                    VStack {
+                        Image("characters-02").resizable().aspectRatio(contentMode: .fit)
+                        Text("Holds the Telescope").font(.system(size: 20))
+                    }
+                    Spacer()
+                    VStack {
+                        Image("characters-04").resizable().aspectRatio(contentMode: .fit)
+                        Text("If the telescope is collapsed, \nand you push the button, \na fun fact pops up on the tablet").multilineTextAlignment(.center).font(.system(size: 20))
+                    }
+                    Spacer()
+                    VStack {
+                        Image("characters-03").resizable().aspectRatio(contentMode: .fit)
+                        Text("Extending the telescope and pushing \nthe button takes porcutres that can \nbe added to the captains report").multilineTextAlignment(.center).font(.system(size: 20))
+                    }
+                    Spacer()
+                }
                 Spacer()
                 HStack {
                     Spacer()

@@ -25,6 +25,7 @@ struct AccessibiltyReportUI: View {
     @State private var selectedLocation: String = "Choose an Location"
     @State private var isShowingMailView = false
     @State private var emailPop = false
+    @State private var imageToShow: Image?
     var audioPlayer: AVAudioPlayer!
     var audioRecorder: AVAudioRecorder!
     var body: some View {
@@ -139,11 +140,39 @@ struct AccessibiltyReportUI: View {
                     }
                 Spacer()
                 //Text("Click your preferred method to describe the need you noticed:")
-                Text("Please now explain the accessibility problem to the researcher")
+                Text("If you took an image, it should display here:")
                     .font(.system(size: 27))
                     .frame(maxWidth: .infinity, alignment: .center)
                     .padding([.leading], 20)
                     .padding([.bottom], -10)
+                VStack {
+                    if let image = imageToShow {
+                        image
+                            .resizable()
+                            .scaledToFit()
+                    } else {
+                        Text("No Image to Show")
+                    }
+                }
+                .onReceive(NotificationCenter.default.publisher(for: Notification.Name("image"))) { _ in
+                    print("Recieved image notification")
+                    if let path = documentDirectoryPath() {
+                        let pngPath = path.appendingPathComponent("newestImage.png")
+                        print("Searching for image at \(pngPath)")
+                        if let pngImage = FileManager.default.contents(atPath: pngPath.path) {
+                            if let uiImage = UIImage(data: pngImage) {
+                                self.imageToShow = Image(uiImage: uiImage)
+                                print("Tried to display image")
+                            } else {
+                                print("Could not display image: data could not be converted to image")
+                            }
+                        } else {
+                            print("Could not display image: likely Image not found")
+                        }
+                    } else {
+                        print("Could not display image: path not valid")
+                    }
+                }
                 Spacer()
                 /*
                 HStack {
@@ -342,7 +371,6 @@ struct MailComposeView: View {
         }
     }
 }
-
 
 #Preview {
     AccessibiltyReportUI()

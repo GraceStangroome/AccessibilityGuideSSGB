@@ -104,7 +104,6 @@ struct HowToAccessibilityReportView: View {
     } // CLosing the body
 } // Closing the View
 
-
 struct HowToAccessibilityReportView_Previews: PreviewProvider {
     static var previews: some View {
         HowToAccessibilityReportView()

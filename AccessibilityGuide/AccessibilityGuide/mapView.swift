@@ -51,13 +51,10 @@ struct mapView: View {
                         Text("Choose a location \n or the Telescope will choose for you").bold()
                         .font(.system(size: 29))
                     Spacer()
-                    Menu("Touch here to see the \nlocation list"){
-                        Button(action: viewController.goToMap){Text("The Ship: Dry Dock")}
-                        Button(action: viewController.goToMap){Text("The Ship: Top Deck")}
+                    Menu("Touch \(Text("here").bold()) to see the \nlocation list"){
+                        Button(action: viewController.goToTopDeck){Text("The Ship: Top Deck")}
+                        Button(action: viewController.goToMiddleDeck){Text("The Ship: Middle Deck")}
                         Button(action: viewController.goToLowerDeck){Text("The Ship: Lower Deck")}
-                        Button(action: viewController.goToMap){Text("The Ship: Middle Deck")}
-                        Button(action: viewController.goToMap){Text("Being Brunel: Ground")}
-                        Button(action: viewController.goToMap){Text("Being Brunel: First")}
                     }
                     .font(.system(size: 20))
                     .foregroundColor(Color.black)

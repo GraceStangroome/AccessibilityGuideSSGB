@@ -28,9 +28,8 @@ class ViewController: UIViewController {
     }
     
     
-    func notifyPopUp(whichPopUp: String) {
-        NotificationCenter.default.post(name: Notification.Name(whichPopUp), object: nil)
-        print ("notified that lower deck pop up should show: \(whichPopUp)")
+    func notifyAreas(what: String) {
+        NotificationCenter.default.post(name: Notification.Name(what), object: nil)
     }
     
     func publish(topic: String, content: String) {
@@ -68,6 +67,20 @@ class ViewController: UIViewController {
             window.makeKeyAndVisible()
         }
         onLowerFloor = true
+    }
+    
+    func goToMiddleDeck() {
+        if let window = UIApplication.shared.windows.first {
+            window.rootViewController = UIHostingController(rootView: MidDeckMapView())
+            window.makeKeyAndVisible()
+        }
+    }
+    
+    func goToTopDeck() {
+        if let window = UIApplication.shared.windows.first {
+            window.rootViewController = UIHostingController(rootView: TopDeckMapView())
+            window.makeKeyAndVisible()
+        }
     }
 
     func makeAccessibilityReport() {
@@ -128,22 +141,22 @@ extension ViewController: CocoaMQTTDelegate {
             mqtt.publish(message)
         case .unacceptableProtocolVersion:
             print("Connection refused: Unacceptable protocol version")
-            notifyPopUp(whichPopUp: "unacceptableProtocolVersion")
+            notifyAreas(what: "unacceptableProtocolVersion")
         case .identifierRejected:
             print("Connection refused: Identifier rejected")
-            notifyPopUp(whichPopUp: "identifierRejected")
+            notifyAreas(what: "identifierRejected")
         case .serverUnavailable:
             print("Connection refused: Server unavailable")
-            notifyPopUp(whichPopUp: "serverUnavailable")
+            notifyAreas(what: "serverUnavailable")
         case .badUsernameOrPassword:
             print("Connection refused: Bad username or password")
-            notifyPopUp(whichPopUp: "badlogOn")
+            notifyAreas(what: "badlogOn")
         case .notAuthorized:
             print("Connection refused: Not authorized")
-            notifyPopUp(whichPopUp: "notAuthorized")
+            notifyAreas(what: "notAuthorized")
         case .reserved: // unusure what this case means but it was missing
             print("Connection refused: Reserved")
-            notifyPopUp(whichPopUp: "reserved")
+            notifyAreas(what: "reserved")
         }
     }
     
@@ -158,17 +171,48 @@ extension ViewController: CocoaMQTTDelegate {
     func mqtt(_ mqtt: CocoaMQTT, didReceiveMessage message: CocoaMQTTMessage, id: UInt16) {
         print("RECIEVED A MESSAGE")
         if let msgString = message.string {
-            print("Message recieved in topic \(message.topic) with payload \(msgString)")
-            if (msgString == "lowerdeck") {
+            print("Message received in topic \(message.topic) with payload \(msgString)")
+            if (msgString == "doPopUps") {
+                notifyAreas(what: "doPopUps")
+            }
+            if (msgString == "0") {
                 if !onLowerFloor {
-                    print("Trying to go to lowerdeck")
                     goToLowerDeck()
                 }
-                notifyPopUp(whichPopUp: "showLowerDeckPop")
-            } else if (msgString == "lowerdeck1") {
-                print("Trying the pop up")
-                notifyPopUp(whichPopUp: "showDiningSaloonPop")
+                notifyAreas(what: "onLowerDeck")
+            } else if (msgString == "1") {
+                notifyAreas(what: "onDiningSaloon")
+            } else if (msgString == "2") {
+                notifyAreas(what: "onEngineRoom")
+            } else if (msgString == "3") {
+                notifyAreas(what: "onHaywardSaloon")
+            } else if (msgString == "4") {
+                notifyAreas(what: "onHoldingBridge")
+            } else if (msgString == "5") {
+                notifyAreas(what: "onForwardHold")
+            } else if (msgString == "6") {
+                goToTopDeck()
+                notifyAreas(what: "onTopDeck")
+            } else if (msgString == "7") {
+                notifyAreas(what: "onGoAloft")
+            } else if (msgString == "8") {
+                notifyAreas(what: "onForecastle")
+            } else if (msgString == "9") {
+                notifyAreas(what: "onAnimals")
+            } else if (msgString == "10") {
+                notifyAreas(what: "onSkylight")
+            } else if (msgString == "11") {
+                notifyAreas(what: "onWheel")
+            } else if (msgString == "12") {
+                goToMiddleDeck()
+                notifyAreas(what: "onMidDeck")
             }
+        } else {
+            // it's a photo I think?
+            print("Message was a photo")
+            saveImgFromBytes(message.payload)
+            // Then we tell the rest of the app that we created an image
+            notifyAreas(what: "image")
         }
     }
     
@@ -190,7 +234,7 @@ extension ViewController: CocoaMQTTDelegate {
     
     func mqttDidDisconnect(_ mqtt: CocoaMQTT, withError err: Error?) {
         print("error occured: \(String(describing: err))")
-        notifyPopUp(whichPopUp: "errOccured")
+        notifyAreas(what: "errOccured")
     }
     
 }

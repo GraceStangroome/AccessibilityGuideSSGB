@@ -18,17 +18,15 @@ struct ContentView: View {
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 150, height: 150, alignment: .leading)
-                VStack{
+                Spacer()
+                VStack(alignment: .leading){
                     Text("Guide for the SS Great Britain")
                         .font(.system(size: 40))
                         .bold()
-                        .padding([.leading], 25)
                     Text("Instructions for Getting Started")
                         .font(.system(size: 30))
                         .multilineTextAlignment(.leading)
-                        .padding([.leading], -90)
                 }
-                .frame(width: 600, height: 150, alignment: .leading)
                 Spacer()
                 Button(action: viewController.goToInstructions){
                     Text("Instruction Page")
@@ -46,29 +44,43 @@ struct ContentView: View {
             .foregroundColor(Color.white)
             .background(Color.red)
             VStack {
-                Text("Welcome to the SS Great Britain.").bold()
-                    .font(.system(size: 50)).font(.largeTitle).padding([.leading], 50).padding([.bottom, .top], 20)
-                Text("Table of Contents for Instructions")
-                    .font(.system(size: 40)).font(.title).padding([.leading], 20)
-                VStack{
-                    let steps: String = "1. Roles\n2. How to use the Telescope\n3. How to use the Map\n4. How to make an Accessibiliy Report"
-                    Text(steps)
-                        .font(.system(size: 40))
-                        .frame(width: 900, height: 230, alignment: .leading)
-                }
-                Button(action: viewController.goToMap) {
-                HStack(alignment: .center){
-                    Text("Skip Instructions and Go to Map")
-                        .font(.system(size: 40))
-                        .foregroundColor(Color.red)
-                        .padding()
-                    Image(systemName: "arrow.right")
-                        .foregroundColor(Color.red)
-                        .font(.system(size: 40))
+                VStack(alignment: .leading) {
+                    Spacer()
+                    Text("Welcome to the SS Great Britain.").bold()
+                        .font(.system(size: 50)).font(.largeTitle)
+                    Spacer()
+                    Text("Table of Contents for Instructions")
+                        .font(.system(size: 40)).font(.title)
+                    Spacer()
+                    Button(action: viewController.goToRoles) {
+                        Text("1. Roles").font(.system(size: 40)).foregroundStyle(Color.black)
+                    }
+                    Button(action: viewController.goToTelescope) {
+                        Text("2. How to use the Telescope").font(.system(size: 40)).foregroundStyle(Color.black)
+                    }
+                    Button(action: viewController.goToHowMapView) {
+                        Text("3. How to use the Map").font(.system(size: 40)).foregroundStyle(Color.black)
+                    }
+                    Button(action: viewController.goToAccessibilityReport) {
+                        Text("4. How to make an Accessibility Report").font(.system(size: 40)).foregroundStyle(Color.black)
                     }
                 }
-                .padding()
+                Spacer()
+                Button(action: viewController.goToRoles) {
+                    Text("Begin going through Instructions").font(.system(size: 45))
+                        .foregroundColor(Color.red)
+                    Image(systemName: "arrow.right")
+                        .foregroundColor(Color.red)
+                        .font(.system(size: 45))
+                }.padding([.top, .bottom], 30)
+                Spacer()
                 HStack {
+                    Button(action: viewController.goToMap) {
+                        Text("Skip Instructions and Go to Map")
+                            .font(.system(size: 40))
+                            .foregroundColor(Color.white)
+
+                    }
                     Spacer()
                     Button(action: viewController.goToRoles){ Text("1. Roles")
                             .font(.system(size: 32))
@@ -76,9 +88,6 @@ struct ContentView: View {
                             .font(.system(size:32))
                     }
                 } // CLosing the Roles button
-                .padding([.top], 15)
-                .padding([ .bottom], 25)
-                .multilineTextAlignment(.trailing)
                 .frame(minWidth: 0, maxWidth: .infinity)
                 .padding()
                 .foregroundColor(Color.white)

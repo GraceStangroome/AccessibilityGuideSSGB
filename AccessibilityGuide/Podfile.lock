@@ -4,31 +4,19 @@ PODS:
   - CocoaMQTT/Core (2.1.6):
     - MqttCocoaAsyncSocket (~> 1.0.8)
   - MqttCocoaAsyncSocket (1.0.8)
-  - NWWebSocket (0.5.3)
-  - PusherSwift (10.1.4):
-    - NWWebSocket (~> 0.5.3)
-    - TweetNacl (~> 1.0.0)
-  - TweetNacl (1.0.2)
 
 DEPENDENCIES:
   - CocoaMQTT
-  - PusherSwift
 
 SPEC REPOS:
   trunk:
     - CocoaMQTT
     - MqttCocoaAsyncSocket
-    - NWWebSocket
-    - PusherSwift
-    - TweetNacl
 
 SPEC CHECKSUMS:
   CocoaMQTT: 1f206228b29318eabdacad0c2e4e88575922c27a
   MqttCocoaAsyncSocket: 77d3b74f76228dd5a05d1f9526eab101d415b30c
-  NWWebSocket: 05fc4419102f33934f87157d70228837e327064f
-  PusherSwift: 671c49e9c5441e30960d2e0282a879b2f8c80bcb
-  TweetNacl: 3abf4d1d2082b0114e7a67410e300892448951e6
 
-PODFILE CHECKSUM: 6bc284968c64098330534efe2a9ec762056f9781
+PODFILE CHECKSUM: 0b3cdc8fb7bb4633bae5b4f1707fbdbcb0073cf1
 
 COCOAPODS: 1.12.1

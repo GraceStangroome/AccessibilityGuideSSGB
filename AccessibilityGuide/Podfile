@@ -3,5 +3,4 @@ use_frameworks!
 
 target 'AccessibilityGuide' do
     pod 'CocoaMQTT'
-    pod 'PusherSwift'
 end
