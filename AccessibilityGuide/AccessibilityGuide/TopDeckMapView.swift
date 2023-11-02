@@ -238,15 +238,21 @@ struct TopDeckMapView: View {
                     }
                 
                 } // end of ZStack
-                Button(action: viewController.makeAccessibilityReport) {
-                    Text("Accessibility needs are different for everyone\nclick \(Text("HERE").bold()) to make an accessibility report without a photo")
-                        .font(.system(size: 25)).bold()
-                        .padding([.bottom], 30)
-                } // Closing the Accessibility report button
+                HStack{
+                    Text("Accessibility needs are different for everyone. Click")
+                    Button(action: viewController.makeAccessibilityReport) {
+                        Text("HERE  ")
+                            .font(.system(size: 25)).bold().foregroundColor(Color.red).background(Color.white)
+                    } // CLosing the Accessibility report button
+                    .mask {
+                                RoundedRectangle(cornerRadius: 5) // for some reason this needs a higher radius
+                    }
+                    Text("to make an accessibility report")
+                }
+                .font(.system(size: 25)).bold()
                 .multilineTextAlignment(.center)
                 .frame(minWidth: 0, maxWidth: .infinity)
                 .frame(height: 90)
-                .padding()
                 .foregroundColor(Color.white)
                 .background(Color.red)
             } // Closing the main body

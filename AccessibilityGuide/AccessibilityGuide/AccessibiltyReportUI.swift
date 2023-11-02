@@ -132,11 +132,15 @@ struct AccessibiltyReportUI: View {
                 Spacer()
                 Text(" ").frame(width: 2000, height: 10, alignment: .leading)
                     .background(Color.red)
-                    .sheet(isPresented: $emailPop) {
+                    .sheet(isPresented: $emailPop, onDismiss: {
+                        viewController.goToMap() })  {
                         PopUpWindowWrapper(popUpWindow: PopUpWindow(title: "Information Sent", text: "Your accessibility report has been successfully submitted"))
                     }
                     .onReceive(NotificationCenter.default.publisher(for: Notification.Name("EmailSent"))) { _ in
                         emailPop = true
+                        if emailPop == false { // because we dismissed it?
+                            viewController.goToMap()
+                        }
                     }
                 Spacer()
                 //Text("Click your preferred method to describe the need you noticed:")
@@ -151,7 +155,8 @@ struct AccessibiltyReportUI: View {
                             .resizable()
                             .scaledToFit()
                     } else {
-                        Text("No Image to Show")
+                        let information = "No Image to Show"
+                        Text(information)
                     }
                 }
                 .onReceive(NotificationCenter.default.publisher(for: Notification.Name("image"))) { _ in
@@ -230,14 +235,23 @@ struct AccessibiltyReportUI: View {
                     }
                     Spacer()
                 }
-                Button(action: viewController.goToMap) {Text("Touch HERE to go back to map without submitting").bold()
-                        .font(.system(size: 40))
-                        .multilineTextAlignment(.trailing)
-                        .frame(minWidth: 0, maxWidth: .infinity)
-                        .padding()
-                        .foregroundColor(Color.white)
-                        .background(Color.red)
+                HStack{
+                    Text("Touch")
+                    Button(action: viewController.goToMap) {
+                        Text("HERE  ")
+                            .bold().foregroundColor(Color.red).background(Color.white)
+                    } // CLosing the Accessibility report button
+                    .mask {
+                                RoundedRectangle(cornerRadius: 5)
+                    }
+                    Text("to go back to the map without submitting")
                 }
+                .font(.system(size: 40)).bold()
+                .multilineTextAlignment(.center)
+                .frame(minWidth: 0, maxWidth: .infinity)
+                .frame(height: 90)
+                .foregroundColor(Color.white)
+                .background(Color.red)
             } // Closing the main body
         } // Closing Vstack of everything
     } // closing the body

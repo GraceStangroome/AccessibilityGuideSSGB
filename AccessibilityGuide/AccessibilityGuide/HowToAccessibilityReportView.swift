@@ -63,16 +63,16 @@ struct HowToAccessibilityReportView: View {
                     .padding([.leading], 20)
                 Text(" ").frame(width: 2000, height: 10, alignment: .leading)
                     .background(Color.red)
-                Text("Make an Accessibility Report when either the Navigator or Captain spots something that you think this guide has missed. Making reports can help improve everyone’s understanding of accessibility!")
+                Text("An Accessibility Report is started when either the Navigator or Captain spots something that you think this guide has missed. Making reports can help improve everyone’s understanding of accessibility!")
                     .font(.system(size: 23))
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
                     .padding([.leading], 20)
                 Text("Examples:").bold().font(.system(size:23))
                 Text("“This floor looks slippery, but it is just glossy” \n “This room has an echo which makes it noisy”").font(.system(size:23))
-                Text("Taking a picture can help staff identify better areas with issues. \n Although you can make reports without a picture.").font(.system(size: 23)).padding([.leading, .trailing])
+                Text("Taking a picture can help others identify better areas with issues. \n Although you can make reports without a picture.").font(.system(size: 23)).padding([.leading, .trailing])
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
                     .padding([.leading], 5)
-                Text("Once you take a photo, and touch “Make a Report,” you will be taken to a report screen. This screen will ask for the general location, a general categorization of the issue, and a brief description. Submitting a report will send your answers anonymously to staff to review.").font(.system(size: 23))
+                Text("Once a photo is taken, the report screen with your image will appear. This screen will ask for the general location, a general categorization of the issue, and a brief description. Submitting a report will send your answers anonymously to staff to review.").font(.system(size: 23))
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
                         .padding([.leading], 20)
                 HStack { // OPening the Footer
@@ -85,7 +85,7 @@ struct HowToAccessibilityReportView: View {
                     } // Closing first button
                     Spacer()
                         .padding([.leading], -40)
-                    Button(action: viewController.goToMap){
+                    Button(action: viewController.goToMapAndConnect){
                         Text("Go to map")
                             .font(.system(size: 32))
                             .multilineTextAlignment(.leading)

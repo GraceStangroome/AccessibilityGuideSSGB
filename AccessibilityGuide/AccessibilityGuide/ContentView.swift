@@ -75,7 +75,7 @@ struct ContentView: View {
                 }.padding([.top, .bottom], 30)
                 Spacer()
                 HStack {
-                    Button(action: viewController.goToMap) {
+                    Button(action: viewController.goToMapAndConnect) {
                         Text("Skip Instructions and Go to Map")
                             .font(.system(size: 40))
                             .foregroundColor(Color.white)

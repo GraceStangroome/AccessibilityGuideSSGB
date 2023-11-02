@@ -111,6 +111,7 @@ struct LowerDeckMapView: View {
                             print("Will do PopUps now")
                         }
                         .onReceive(NotificationCenter.default.publisher(for: Notification.Name("onDiningSaloon"))) { _ in
+                            onLowerDeck = false
                             onDiningSaloon = true
                             onEngineRoom = false
                             onForwardHold = false
@@ -118,6 +119,7 @@ struct LowerDeckMapView: View {
                             onHoldingBridge = false
                         }
                         .onReceive(NotificationCenter.default.publisher(for: Notification.Name("onEngineRoom"))) { _ in
+                            onLowerDeck = false
                             onDiningSaloon = false
                             onEngineRoom = true
                             onForwardHold = false
@@ -125,6 +127,7 @@ struct LowerDeckMapView: View {
                             onHoldingBridge = false
                         }
                         .onReceive(NotificationCenter.default.publisher(for: Notification.Name("onForwardHold"))) { _ in
+                            onLowerDeck = false
                             onDiningSaloon = false
                             onEngineRoom = false
                             onForwardHold = true
@@ -132,6 +135,7 @@ struct LowerDeckMapView: View {
                             onHoldingBridge = false
                         }
                         .onReceive(NotificationCenter.default.publisher(for: Notification.Name("onHaywardSaloon"))) { _ in
+                            onLowerDeck = false
                             onDiningSaloon = false
                             onEngineRoom = false
                             onForwardHold = false
@@ -139,6 +143,7 @@ struct LowerDeckMapView: View {
                             onHoldingBridge = false
                         }
                         .onReceive(NotificationCenter.default.publisher(for: Notification.Name("onHoldingBridge"))) { _ in
+                            onLowerDeck = false
                             onDiningSaloon = false
                             onEngineRoom = false
                             onForwardHold = false
@@ -203,7 +208,7 @@ struct LowerDeckMapView: View {
                     // end of pop up code
                     // map labels
                     VStack {
-                        Text("Stepped Exit")
+                        Text("Emergency Exit")
                         Image(systemName: "arrow.up")
                             .bold()
                             .font(.system(size:32))
@@ -214,7 +219,7 @@ struct LowerDeckMapView: View {
                         Image(systemName: "arrow.down")
                             .bold()
                             .font(.system(size:32))
-                        Text("Accessible Exit")
+                        Text("Accessible Emergency Exit")
                     }
                     .position(x: 370, y: 340)
                     
@@ -225,6 +230,8 @@ struct LowerDeckMapView: View {
                         .position(x: 450, y: 160)
                     overlayingButton(imageName: "stairs", buttonText: "Stairs to \n other decks", isSystem: true, isStairs: true)
                         .position(x: 660, y: 200)
+                    overlayingButton(imageName: "elevator", buttonText: "Elevator", isSystem: false, isStairs: false)
+                        .position(x: 525, y: 260)
                     overlayingButton(imageName: "stairs", buttonText: "Stairs to \n other decks", isSystem: true, isStairs: true)
                         .position(x: 660, y: 270)
                     overlayingButton(imageName: "chair.lounge.fill", buttonText: "Seating", isSystem: true, isStairs: false)
@@ -284,15 +291,21 @@ struct LowerDeckMapView: View {
                     }
                 
                 } // end of ZStack
-                Button(action: viewController.makeAccessibilityReport) {
-                    Text("Accessibility needs are different for everyone\nclick \(Text("HERE").bold()) to make an accessibility report without a photo")
-                        .font(.system(size: 25)).bold()
-                        .padding([.bottom], 30)
-                } // Closing the Accessibility report button
+                HStack{
+                    Text("Accessibility needs are different for everyone. Click")
+                    Button(action: viewController.makeAccessibilityReport) {
+                        Text("HERE  ")
+                            .font(.system(size: 25)).bold().foregroundColor(Color.red).background(Color.white)
+                    } // CLosing the Accessibility report button
+                    .mask {
+                                RoundedRectangle(cornerRadius: 5)
+                    }
+                    Text("to make an accessibility report")
+                }
+                .font(.system(size: 25)).bold()
                 .multilineTextAlignment(.center)
                 .frame(minWidth: 0, maxWidth: .infinity)
                 .frame(height: 90)
-                .padding()
                 .foregroundColor(Color.white)
                 .background(Color.red)
             } // Closing the main body

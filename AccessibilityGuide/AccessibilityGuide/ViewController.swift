@@ -10,15 +10,15 @@ import SwiftUI
 import CocoaMQTT
 
 class ViewController: UIViewController {
-    
-    let mqttClient = CocoaMQTT(clientID: "iPad", host: "raspberrypi.local", port: 1883)
+    // to change the code for each iPad, you just need to edit the clientID
+    let mqttClient = CocoaMQTT(clientID: "iPad1", host: "raspberrypi1.local", port: 1883)
     @State private var hasSetup = false
     @State private var onLowerFloor = false
     
     func setup() {
         mqttClient.logLevel = .debug
-        mqttClient.username = "iPad1"
-        mqttClient.password = "Apple"
+        mqttClient.username = mqttClient.clientID
+        mqttClient.password = "ekun949@"
         mqttClient.willMessage = CocoaMQTTMessage(topic: "/will", string: "dieout")
         mqttClient.keepAlive = 60
         mqttClient.delegate = self
@@ -69,6 +69,7 @@ class ViewController: UIViewController {
         onLowerFloor = true
     }
     
+    
     func goToMiddleDeck() {
         if let window = UIApplication.shared.windows.first {
             window.rootViewController = UIHostingController(rootView: MidDeckMapView())
@@ -112,7 +113,7 @@ class ViewController: UIViewController {
     }
     
     
-    @IBAction func goToMap() {
+    @IBAction func goToMapAndConnect() {
         print("Got here")
         if hasSetup {
             _ = mqttClient.connect()
@@ -120,6 +121,13 @@ class ViewController: UIViewController {
             setup()
         }
         
+        if let window = UIApplication.shared.windows.first {
+            window.rootViewController = UIHostingController(rootView: mapView())
+            window.makeKeyAndVisible()
+        }
+    }
+    
+    func goToMap() {
         if let window = UIApplication.shared.windows.first {
             window.rootViewController = UIHostingController(rootView: mapView())
             window.makeKeyAndVisible()
@@ -133,11 +141,12 @@ extension ViewController: CocoaMQTTDelegate {
     func mqtt(_ mqtt: CocoaMQTT, didConnectAck ack: CocoaMQTTConnAck) {
         print("CONNECTION OCCURED")
         print(ack)
+        
         switch ack {
         case .accept:
             print("Connection accepted. You are now connected to the broker.")
-            mqtt.subscribe("messagesforiPad", qos: CocoaMQTTQoS.qos1)
-            let message = CocoaMQTTMessage(topic: "MessagesFromiPad", string: "Connection successful", qos: CocoaMQTTQoS.qos1)
+            mqtt.subscribe("messagesfor"+mqttClient.clientID, qos: CocoaMQTTQoS.qos1)
+            let message = CocoaMQTTMessage(topic: "MessagesFrom"+mqttClient.clientID, string: "Connection successful", qos: CocoaMQTTQoS.qos1)
             mqtt.publish(message)
         case .unacceptableProtocolVersion:
             print("Connection refused: Unacceptable protocol version")
@@ -169,50 +178,66 @@ extension ViewController: CocoaMQTTDelegate {
     }
     
     func mqtt(_ mqtt: CocoaMQTT, didReceiveMessage message: CocoaMQTTMessage, id: UInt16) {
-        print("RECIEVED A MESSAGE")
+        print("RECEIVED A MESSAGE")
         if let msgString = message.string {
             print("Message received in topic \(message.topic) with payload \(msgString)")
-            if (msgString == "doPopUps") {
+            if (msgString == "pop up iPad please") {
                 notifyAreas(what: "doPopUps")
             }
-            if (msgString == "0") {
+            if (msgString == "1") {
                 if !onLowerFloor {
                     goToLowerDeck()
                 }
                 notifyAreas(what: "onLowerDeck")
-            } else if (msgString == "1") {
-                notifyAreas(what: "onDiningSaloon")
+                
             } else if (msgString == "2") {
-                notifyAreas(what: "onEngineRoom")
+                notifyAreas(what: "onDiningSaloon")
+                
             } else if (msgString == "3") {
-                notifyAreas(what: "onHaywardSaloon")
+                notifyAreas(what: "onEngineRoom")
+                
             } else if (msgString == "4") {
-                notifyAreas(what: "onHoldingBridge")
+                notifyAreas(what: "onHaywardSaloon")
+                
             } else if (msgString == "5") {
-                notifyAreas(what: "onForwardHold")
+                notifyAreas(what: "onHoldingBridge")
+                
             } else if (msgString == "6") {
-                goToTopDeck()
-                notifyAreas(what: "onTopDeck")
+                notifyAreas(what: "onForwardHold")
+                
             } else if (msgString == "7") {
-                notifyAreas(what: "onGoAloft")
+                notifyAreas(what: "onHaywardSaloon")
+                // for testing on Thursday, we want number 7 to also trigger
+                // the hayward saloon, but for regular use number 7 would
+                // go to the Top Deck
+            }
+            /*    goToTopDeck()
+                notifyAreas(what: "onTopDeck")
             } else if (msgString == "8") {
-                notifyAreas(what: "onForecastle")
+                notifyAreas(what: "onGoAloft")
             } else if (msgString == "9") {
-                notifyAreas(what: "onAnimals")
+                notifyAreas(what: "onForecastle")
             } else if (msgString == "10") {
-                notifyAreas(what: "onSkylight")
+                notifyAreas(what: "onAnimals")
             } else if (msgString == "11") {
-                notifyAreas(what: "onWheel")
+                notifyAreas(what: "onSkylight")
             } else if (msgString == "12") {
+                notifyAreas(what: "onWheel")
+            } else if (msgString == "13") {
                 goToMiddleDeck()
                 notifyAreas(what: "onMidDeck")
             }
+             */
         } else {
             // it's a photo I think?
             print("Message was a photo")
             saveImgFromBytes(message.payload)
+            makeAccessibilityReport()
             // Then we tell the rest of the app that we created an image
-            notifyAreas(what: "image")
+            // It needs a short wait time because we need to give makeAccessibility report time to start listening for the notification
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                self.notifyAreas(what: "image")
+            }
         }
     }
     
@@ -235,6 +260,8 @@ extension ViewController: CocoaMQTTDelegate {
     func mqttDidDisconnect(_ mqtt: CocoaMQTT, withError err: Error?) {
         print("error occured: \(String(describing: err))")
         notifyAreas(what: "errOccured")
+        print("reconnecting...")
+        _ = mqttClient.connect()
     }
     
 }

@@ -108,7 +108,7 @@ struct RoleView: View {
                     Spacer()
                     VStack {
                         Image("characters-03").resizable().aspectRatio(contentMode: .fit)
-                        Text("Extending the telescope and pushing \nthe button takes porcutres that can \nbe added to the captains report").multilineTextAlignment(.center).font(.system(size: 20))
+                        Text("Extending the telescope and pushing \nthe button takes pictures that can \nbe added to the Captain's report").multilineTextAlignment(.center).font(.system(size: 20))
                     }
                     Spacer()
                 }

@@ -65,11 +65,25 @@ struct overlayingButton: View {
                     .foregroundStyle(Color.white)
                     .background((!isPressed && !isStairs) ? Color.black : (isPressed ? Color.red : Color.gray))
             } else {
-                let dynamicImageName = isPressed ? "\(imageName).red" : imageName
-                Image(dynamicImageName)
-                    .resizable()
-                    .aspectRatio(contentMode: ContentMode.fit)
-                    .frame(width: 27, height: 27)
+                if imageName == "elevator" {
+                    if isPressed {
+                        Image("elevator.red")
+                        .resizable()
+                        .aspectRatio(contentMode: ContentMode.fit)
+                        .frame(width: 27, height: 27)
+                    } else {
+                        Image("elevator")
+                            .resizable()
+                            .frame(width: 33, height: 33)
+                            .padding(-4)
+                    }
+                } else {
+                    let dynamicImageName = isPressed ? "\(imageName).red" : imageName
+                    Image(dynamicImageName)
+                        .resizable()
+                        .aspectRatio(contentMode: ContentMode.fit)
+                        .frame(width: 27, height: 27)
+                }
             }
             if isPressed {
                 Text(buttonText)
